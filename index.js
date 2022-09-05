@@ -147,29 +147,39 @@ class Indumentaria {
 let totalCompra = 0
 let seguirComprando = true
 let comprarMas
+let producos = []
+let carrito = []
 
 alert("Bienvenidos a Prieto mayorista, vendemos las curvas completas de cada producto. Cada curva contiene 5 prendas de cada talle, XS-S-M-L-XL.")
 
 let seleccionarProducto = parseInt(prompt("Ingresa la prenda que desees comprar: 1- Jeans $20000, 2- Campera $25000, 3- Camisa $30000, 4- Remera $15000"))
 
 
-let curvaJeans = new Indumentaria("Jeans",20000,1)
+const curvaJeans = new Indumentaria("Jeans",20000,1)
+producos.push(curvaJeans)
 
-let curvaCamperas = new Indumentaria("Camperas",25000,2)
+const curvaCamperas = new Indumentaria("Camperas",25000,2)
+producos.push(curvaCamperas)
 
-let curvaCamisas = new Indumentaria("Camisas",30000,3)
+const curvaCamisas = new Indumentaria("Camisas",30000,3)
+producos.push(curvaCamisas)
 
-let curvaRemeras = new Indumentaria("Remeras",15000,4)
+const curvaRemeras = new Indumentaria("Remeras",15000,4)
+producos.push(curvaRemeras)
 
 while(seguirComprando=true){
     if (seleccionarProducto === 1){
         totalCompra = totalCompra + curvaJeans.precio
+        carrito.push(producos[0])
     } else if (seleccionarProducto === 2){
         totalCompra = totalCompra + curvaCamperas.precio
+        carrito.push(producos[1])
     } else if (seleccionarProducto === 3){
         totalCompra = totalCompra + curvaCamisas.precio
+        carrito.push(producos[2])
     } else if (seleccionarProducto === 4){
         totalCompra = totalCompra + curvaRemeras.precio
+        carrito.push(producos[3])
     } else{
         seleccionarProducto = parseInt(prompt("El produco ingresado no existe. Ingresa: 1- Jeans $20000, 2- Campera $25000, 3- Camisa $30000, 4- Remera $15000"))
         continue
@@ -194,7 +204,8 @@ while(seguirComprando=true){
     }
 }
 
-alert (`El total de la compra es de $${totalCompra}. Precio de lista.`)
+console.log (carrito)
+alert (`El total a pagar es de $${totalCompra}. Precio de lista.`)
 
 const pagoTarjeta = (monto) => {
     let montoConInteres = monto + (monto * 30/100)    
