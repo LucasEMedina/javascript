@@ -473,3 +473,523 @@ function calcularPrecioConImpuesto(valor){
 let valorFinalConImpuesto = calcularPrecioConImpuesto(valorConDescuento)
 alert('El valor final a pagar es de: '+valorFinalConImpuesto)
 
+
+
+
+
+/////     CLASE 5 OBJETOS
+
+// clave - valor   nombre = farid  ----- apellido = hernandez ------ edad = 32
+
+let primerObjeto = {
+    nombre:"Farid",
+    apellido:"Hernandez",
+    edad:32
+    };
+    
+    const nombrePerro = "Firulais"
+    
+    const animal1 = {
+    tipo:"perro",
+    nombre:nombrePerro,
+    edad:4,
+    raza: "French"
+    };
+    
+    //let animal1Tipo = "perro"
+    //let animalnombre = "Firulais"
+    
+    // console.log(animal1)
+    // console.log(animal1.tipo,primerObjeto.nombre) // 1
+    // console.log(animal1["tipo"]) // 2
+    
+    //alert(`Este ${animal1.tipo} vive con ${primerObjeto.nombre} y se llama ${animal1.nombre}`)
+     
+    
+    // anadiendo propiedades a objeto animal1
+    //console.log(animal1)
+    animal1.vivo = true
+    //animal1.dueno = "Victor"
+    animal1["dueno"] = "Victor"
+    animal1.nombre = "Rocky"
+    //console.log(animal1)
+    
+    const animal2 = {
+        tipo:"perro",
+        nombre:"Roro",
+        edad:5,
+        raza: "Siberiano"
+    }
+    
+    const animal3 = {
+        tipo:"gato",
+        nombre:"Mishu",
+        edad:7,
+        raza: "Siamesa"
+    }
+    
+    function Animal(tipo,nombre,edad,raza){
+        this.tipo = tipo
+        this.nombre = nombre
+        this.edad = edad
+        this.raza = raza
+    } 
+    
+    const animal4 = new Animal("gato","Fiufiu",5,"Blanco")
+    const animal5 = new Animal("pez","Dory",2,"Bailarina")
+    // console.log(animal4)
+    // console.log(animal5)
+    // console.log(Animal)
+    
+    // function Usuario(nombre,email,password){
+    //     this.nombre = nombre
+    //     this.email = email
+    //     this.password = password
+    //     this.tieneEmail = function(){
+    //         if(this.email){
+    //             return true
+    //         } else{
+    //             return false
+    //         }
+    //     }
+    //     this.cambiarPassword = function(nuevaPassword){
+    //         this.password = nuevaPassword
+    //     }
+    // }
+    
+    //const usuario1 = new Usuario("Farid","fsesin@mail.com","12345")
+    //const usuario2 = new Usuario("Cris",null,"abcde")
+    //console.log(usuario1,usuario2)
+    
+    // function tieneEmail(usuario){
+    //     if(usuario.email){
+    //         return true
+    //     } else{
+    //         return false
+    //     }
+    // }
+    //console.log(tieneEmail(usuario2))
+    // function cambiarPassword(usuario,nuevaPassword){
+    //     usuario.password = nuevaPassword
+    // }
+    //cambiarPassword(usuario1,'hola')
+    //console.log(usuario1)
+    
+    // console.log(usuario1.tieneEmail())
+    // usuario1.cambiarPassword('chao')
+    // console.log(usuario1)
+    
+    class Usuario {
+    constructor(nombre,email,password){
+        this.nombre = nombre
+        this.email = email
+        this.password = password
+    }
+        tieneEmail(){
+            if(this.email){
+                return true
+            } else{
+                return false
+            } 
+        }
+        cambiarPassword(nuevaPassword){
+            this.password = nuevaPassword
+        }
+    }
+    
+    const usuario3 = new Usuario("Juan","juan@mail.com","clave1234")
+    console.log(usuario3.tieneEmail())
+
+
+
+/////    AFTER CLASS OBJETOS    /////
+
+///   FUNCIONES
+
+const restar = (a, b) => {
+    return a + b
+}
+
+let resultado = restar(10, 10)
+console.log(resultado)
+
+resultado = resultado + 30
+
+console.log(resultado)
+
+function sumar (a, b){
+    return a + b
+}
+ let resultadoSuma = sumar(10, 10)
+
+
+///   OBJETOS
+
+let producto = {
+    nombre: "laptop",
+    precio: 150000,
+    cantidad: 20
+}
+
+let producto2 = {
+    nombre: "lavadora",
+    precio: 200000,
+    cantidad: 10
+}
+
+let producto3 = {
+    nombre: "auto",
+    precio: 4000000,
+    cantidad: 5
+}
+
+
+console.log(producto3.precio);
+
+///    FUNCIONES CONSTRUCTORAS O CLASES
+
+class Producto {
+    constructor(nombre, precio, cantidad){
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        // this.cambiarPrecio = (nuevoPrecio) => {
+        //     this.precio = nuevoPrecio
+        // }
+    }
+    
+    imprimirNombre(){
+        console.log(this.nombre)
+    }
+
+    cambiarPrecio(nuevoPrecio){
+        this.precio = nuevoPrecio;
+    }
+
+
+    
+}
+let producto1 = new Producto("Laptop", 150000, 10)
+producto1.cambiarPrecio(50000)
+
+
+console.log(producto1)
+
+///  EJEMPLO CALCULADORA CON FUNCIONES
+
+let a = parseInt(prompt("ingresa el numero 1"))
+let b = parseInt(prompt("ingresa el numero 2"));
+let operacion = parseInt(prompt("que operacion desea realizar 1-suma 2-resta 3-multiplicacion 4-division"))
+
+
+const calculadora = (numero1, numero2, operacion) => {
+    if(operacion === 1){
+        alert(`el resultado de la suma es ${numero1 + numero2}`)
+    }else if(operacion === 2){
+        alert(`el resultado de la resta es ${numero1 - numero2}`)
+    }else if(operacion === 3){
+        alert(`el resultado de la multiplicacion es ${numero1 * numero2}`)
+    }else if(operacion === 4){
+        alert(`el resultado de la division es ${numero1 / numero2}`)
+    }
+}
+
+calculadora(a, b, operacion)
+
+
+
+
+//////     CLASE 6 ARRAYS
+
+let primerArray = [true,2,'hi',[1,2,3],'hola']
+
+// posiciones       0   1   2     3       4
+// largo del arreglo            5
+
+const segundoArray = [2,3,4,5]
+//console.log(primerArray)
+//console.log(segundoArray)
+
+console.log(primerArray.length) // cantidad de elementos
+// console.log(primerArray[0]) // mostrar elemento posicion 2
+// console.log(primerArray[1])
+// console.log(primerArray[2])
+// console.log(primerArray[3])
+// console.log(primerArray[4])
+
+for(let i =0;i<=primerArray.length;i++){
+    console.log(i,primerArray[i])
+}
+
+for(let i =0;i<segundoArray.length;i++){
+    segundoArray[i] = segundoArray[i]+1
+}
+console.log(segundoArray)
+
+// .push ----  .unshift
+
+// primerArray.push('Elemento final')
+// primerArray.unshift('Elemento inicial')
+// // primerArray.push(5)
+// // primerArray.push(5)
+// // primerArray.push(5)
+// // primerArray.push(5)
+// // primerArray.push(5)
+
+// // .pop ----- .shift
+// segundoArray.pop()
+// segundoArray.shift()
+
+// console.log(primerArray)
+// console.log(segundoArray)
+
+let animales = ['gato','perro','serpiente','caballo','raton']
+
+//.splice eliminar uno o mas elementos de un arreglo
+const animalesEliminados = animales.splice(1,3)
+//console.log(animales)
+//console.log(animalesEliminados)
+
+let saludar = ['hola','como estas','?']
+//saludar.join('')
+console.log(saludar.join(' '))
+
+console.log(primerArray.concat(segundoArray))
+
+
+/// EJEMPLO
+
+//let numero = parseInt(prompt('Ingresa un numero'))
+let numeros = []
+let i = 1 
+while(i<=5){
+    let numero = parseInt(prompt('Ingresa otro numero'))
+    numeros.push(numero)
+    i++
+}
+//        [4,7,9,10,2]
+let numeroPregunta = parseInt(prompt('Que numero quieres averiguar?'))
+
+
+let existeNumero = numeros.includes(numeroPregunta)
+console.log(existeNumero)
+let indice = numeros.indexOf(numeroPregunta)
+
+if(existeNumero){
+    alert(`El numero ingresado se encuentra en la posicion ${indice}`)
+} else {
+    alert('El numero ingresado no esta en este arreglo')
+}
+
+// if(indice!==-1){
+//     alert(`El numero ingresado se encuentra en la posicion ${indice}`)
+// } else {
+//     alert('El numero ingresado no esta en este arreglo')
+// }
+
+
+/// OTRO EJEMPLO
+
+let totalCompra = 0
+let productoSeleccionado = parseInt(
+  prompt(
+    'Ingresa el numero del producto que quieres comprar: 1.Iphone - 2.TV - 3.Ipad - 4.Computador'
+  )
+)
+let seguirComprando = true
+let decision
+let productos = []
+let carrito = []
+// class Producto {
+//   constructor(nombre, precio,stock) {
+//     this.nombre = nombre
+//     this.precio = precio
+//     this.stock = stock
+//   }
+
+//   modificarStock(){
+//     this.stock = this.stock - 1
+//   }
+// }
+// const iphone = new Producto('Iphone', 650,5)
+// iphone.modificarStock()
+// iphone.modificarStock()
+// iphone.modificarStock()
+
+
+// const tv = new Producto('TV', 350)
+// const ipad = new Producto('Ipad', 250)
+// const computador = new Producto('Computador', 1200)
+
+const iphone = {
+  nombre:'Iphone',
+  precio: 650
+}
+productos.push(iphone)
+const tv = {
+  nombre:'TV',
+  precio: 350,
+}
+productos.push(tv)
+const ipad = {
+  nombre:'Ipad',
+  precio: 250
+}
+productos.push(ipad)
+const computador = {
+  nombre:'Computador',
+  precio: 1200
+}
+productos.push(computador)
+
+console.log(productos)
+
+while (seguirComprando === true) {
+  if (productoSeleccionado === 1) {
+    carrito.push(productos[0])
+  } else if (productoSeleccionado === 2) {
+    carrito.push(productos[1])
+  } else if (productoSeleccionado === 3) {
+    carrito.push(productos[2])
+  } else if (productoSeleccionado === 4) {
+    carrito.push(productos[3])
+  } else {
+    productoSeleccionado = parseInt(
+      prompt(
+        'ingresa un producto existente: 1.Iphone - 2.TV - 3.Ipad - 4.Computador'
+      )
+    )
+    continue
+  }
+
+  decision = parseInt(prompt('Quieres seguir agregando productos? 1.Si - 2.No'))
+  if (decision === 1) {
+    productoSeleccionado = parseInt(
+      prompt(
+        'Ingresa el numero del producto que quieres comprar: 1.Iphone - 2.TV - 3.Ipad - 4.Computador'
+      )
+    )
+  } else if (decision === 2) {
+    seguirComprando = false
+  }
+}
+
+console.log(carrito)
+
+for(let i=0;i<carrito.length;i++){
+  totalCompra = totalCompra +carrito[i].precio
+}
+
+for (const prod of carrito) {
+  totalCompra = totalCompra +prod.precio
+}
+
+
+
+
+alert('El valor total sin descuento ni impuestos es: ' + totalCompra)
+
+//////      CLASE 7    FUNCIONES DE ORDEN SUPERIOR
+
+// // caso 1
+// function ordenSuperior1(){
+//     return function(){
+
+//     }
+// }
+// // caso 2
+// function ordenSuper2(suma){
+//     return
+// }
+
+
+// //ejemplo caso 1
+
+// function elevar(n){
+//  return function(m){
+//     return m**n
+//  }
+// }
+
+// let cuadrado = elevar(2)
+// let cubo = elevar(3)
+// let cuatro = elevar(4)
+
+// console.log(cuadrado(7))
+// console.log(cuadrado(3))
+
+// //ejemplo caso 2
+// function suma(num1,num2){
+//     return num1+num2
+// }
+// function resta(num1,num2){
+//     return num1-num2
+// }
+
+// function ope(n1,n2,fn){
+//     return  fn(n1,n2)
+// }
+
+// console.log(ope(5,2,suma))
+// console.log(ope(5,2,resta))
+
+const arregloNum = [2,4,6,43,2,6,78,4,3,78,3,7,8]
+
+const arregloObjeto = [
+    {nombre:'Carlos',edad:24,curso:'JS8'},
+    {nombre:'Juan',edad:22,curso:'JS10'},
+    {nombre:'Edwin',edad:32,curso:'JS7'},
+    {nombre:'Andres',edad:36,curso:'JS10'},
+    {nombre:'Laura',edad:18,curso:'JS12'},
+]
+
+// for (let i = 0; i < arregloNum.length; i++) {
+//     console.log(arregloNum[i])
+// }
+
+//arregloObjeto.forEach(obj=>console.log(obj.edad+10))
+// let buscador = prompt('ingresa el nombre que quieras buscar')
+// const elementoBuscado = arregloObjeto.find(obj=>obj.nombre===buscador)
+// //console.log(elementoBuscado)
+// if(elementoBuscado){
+//     alert('este nombre existe')
+// } else{
+//     alert('elemento no existe')
+// }
+
+// const objetosFiltrados = arregloObjeto.filter(obj=>obj.nombre!=='Juan')
+// console.log(objetosFiltrados)
+
+// const objetosFiltrados = arregloObjeto.some(obj=>obj.nombre!=='Juan')
+// console.log(objetosFiltrados)
+
+// const objetosFiltrados = arregloObjeto.map(obj=>obj.edad)
+// console.log(objetosFiltrados)
+
+// const resultado = arregloObjeto.reduce((obj1,obj2)=>(obj1+obj2.edad),0)
+// console.log(resultado)
+
+// console.log(arregloNum.sort((num1,num2)=>num2-num1))
+// console.log(arregloObjeto.sort((obj1,obj2)=>obj1.edad-obj2.edad))
+// console.log(arregloObjeto.sort((obj1,obj2)=>obj2.nombre.localeCompare(obj1.nombre)))
+
+
+//Math
+
+console.log(Math.PI)
+console.log(Math.sqrt(9))
+console.log(Math.pow(2,2))
+console.log(Math.round(3.5674456))
+console.log(Math.floor(4.277865))
+console.log(Math.ceil(Math.random()*20))
+
+const fecha = new Date()
+const fechaCumpleanos = new Date(1995, 11, 17)
+
+// console.log(fecha.getFullYear())
+// console.log(fecha.getMonth())
+console.log(fechaCumpleanos.toLocaleString())
+
+
+
+
