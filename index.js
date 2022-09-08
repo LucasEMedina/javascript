@@ -131,23 +131,13 @@ while (fechajugada = true, fecha<cantidadFechas) {
 
 
 
-////   DESAFIO COMPLEMENTARIO (INCORPORAR ARRAYS)
+////   PRIMER PRE ENTREGA DEL PROYECTO FINAL
 
-class Indumentaria {
-    constructor(prenda, precio, id){
-        this.prenda = prenda;
-        this.precio = precio;
-        this.id = id;
-        this.cambiarPrecio = (nuevoPrecio) => {
-            this.precio = nuevoPrecio
-        }
-    }
-}
 
 let totalCompra = 0
 let seguirComprando = true
 let comprarMas
-let producos = []
+let productos = []
 let carrito = []
 
 alert("Bienvenidos a Prieto mayorista, vendemos las curvas completas de cada producto. Cada curva contiene 5 prendas de cada talle, XS-S-M-L-XL.")
@@ -155,32 +145,43 @@ alert("Bienvenidos a Prieto mayorista, vendemos las curvas completas de cada pro
 let seleccionarProducto = parseInt(prompt("Ingresa la prenda que desees comprar: 1- Jeans $20000, 2- Campera $25000, 3- Camisa $30000, 4- Remera $15000"))
 
 
-const curvaJeans = new Indumentaria("Jeans",20000,1)
-producos.push(curvaJeans)
+const curvaJeans = {
+    prenda: 'Jeans',
+    precio: 20000,
+    id: 1
+}
+productos.push(curvaJeans)
 
-const curvaCamperas = new Indumentaria("Camperas",25000,2)
-producos.push(curvaCamperas)
+const curvaCamperas = {
+    prenda: 'Camperas',
+    precio: 25000,
+    id: 2
+}
+productos.push(curvaCamperas)
 
-const curvaCamisas = new Indumentaria("Camisas",30000,3)
-producos.push(curvaCamisas)
+const curvaCamisas = {
+    prenda: 'Camisa',
+    precio: 30000,
+    id: 3
+}
+productos.push(curvaCamisas)
 
-const curvaRemeras = new Indumentaria("Remeras",15000,4)
-producos.push(curvaRemeras)
+const curvaRemeras = {
+    prenda: 'Remeras',
+    precio: 15000,
+    id: 4
+}
+productos.push(curvaRemeras)
+
+console.log(productos)
 
 while(seguirComprando=true){
-    if (seleccionarProducto === 1){
-        totalCompra = totalCompra + curvaJeans.precio
-        carrito.push(producos[0])
-    } else if (seleccionarProducto === 2){
-        totalCompra = totalCompra + curvaCamperas.precio
-        carrito.push(producos[1])
-    } else if (seleccionarProducto === 3){
-        totalCompra = totalCompra + curvaCamisas.precio
-        carrito.push(producos[2])
-    } else if (seleccionarProducto === 4){
-        totalCompra = totalCompra + curvaRemeras.precio
-        carrito.push(producos[3])
-    } else{
+    const productoSolicitado = productos.find(prod=>prod.id === seleccionarProducto)
+    if (productoSolicitado) {
+        totalCompra = totalCompra + productoSolicitado.precio
+        carrito.push(productoSolicitado)
+    }
+     else{
         seleccionarProducto = parseInt(prompt("El produco ingresado no existe. Ingresa: 1- Jeans $20000, 2- Campera $25000, 3- Camisa $30000, 4- Remera $15000"))
         continue
     }
@@ -204,23 +205,46 @@ while(seguirComprando=true){
     }
 }
 
-console.log (carrito)
+carrito.forEach(prod=>console.log(prod))
 alert (`El total a pagar es de $${totalCompra}. Precio de lista.`)
 
-const pagoTarjeta = (monto) => {
-    let montoConInteres = monto + (monto * 30/100)    
-    return montoConInteres
+let buscador = parseInt(prompt('Ingresa el numero del producto que quieras saber si agregaste a tu carrito: 1- Jeans, 2- Camperas, 3-Camisas o 4- Remeras'))
+const productoBuscado = carrito.find(prod=>prod.id === buscador)
+    if(productoBuscado){
+        alert(`Si cargaste "${productoBuscado.prenda}" en tu carrito.`)
+    } else{
+        alert('NO. Ese producto no esta.')
+        }
+
+const mediosDePago = []    
+
+const pagoPorTransferencia = (monto) => {
+    montoTransferido = monto
+    id = 1
+    return montoTransferido
 }
+mediosDePago.push(pagoPorTransferencia)
 
 const pagoEfectivo = (monto) => {
-    let montoEnEfectivo = monto - (monto * 15/100)    
+    let montoEnEfectivo = monto - (monto * 15/100)
+    id = 2    
     return montoEnEfectivo
 }
+mediosDePago.push(pagoEfectivo)
+
+const pagoTarjeta = (monto) => {
+    let montoConInteres = monto + (monto * 30/100)
+    id = 3    
+    return montoConInteres
+}
+mediosDePago.push(pagoTarjeta)
+
+console.log(mediosDePago)
 
 let precioDeLista = parseInt(prompt("Elige el medio de pago para realizar la compra: 1- Transferencia (mantiene el precio de lista). 2- Efectivo en el local (15% OFF). 3- Tarjeta de credito, 3 o 6 cuotas (30% de recargo)."))
 
 while(precioDeLista){
-if (precioDeLista === 1) {
+    if (precioDeLista === 1) {
     alert (`El monto a transferir es de $${totalCompra}. Alias Prietro.Mayorista o CBU 5500207948`)
     break
 } else if (precioDeLista === 2) {
