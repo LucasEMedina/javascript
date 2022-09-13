@@ -134,7 +134,7 @@ while (fechajugada = true, fecha<cantidadFechas) {
 ////   PRIMER PRE ENTREGA DEL PROYECTO FINAL
 
 
-let totalCompra = 0
+/* let totalCompra = 0
 let seguirComprando = true
 let comprarMas
 let productos = []
@@ -261,7 +261,62 @@ while(precioDeLista){
 
 }
 
-alert ("Gracias por visitar nuestro sitio!! Que tengas una buena jornada.")
+alert ("Gracias por visitar nuestro sitio!! Que tengas una buena jornada.") */
+
+
+/////   DESAFIO COMPLEMENTARIO DOM
+
+const carrito = []
+const productos = []
+
+class Figura{
+    constructor(nombre, precio, img, id, desc = ''){
+        this.nombre = nombre
+        this.precio = precio
+        this.img = img
+        this.desc = desc
+    }
+    cardFiguras(){
+        const card = `
+            <div class="card-container">
+                <img src=${this.img} class="card-img-top" alt="${this.nombre}">
+                <div class="card-body">
+                    <h3 class="card-title">${this.nombre}</h3>
+                    <p class="card-text">${this.desc} </p>
+                    <h4 class="card-precio">$${this.precio}</h4>
+                </div>
+                <div class="card-footer container-fluid">
+                    <button id=${this.id} type="button" class="btn btn-primary">COMPRAR</button>
+                </div>
+            </div>
+        `
+        const contain = document.getElementById('articulos')
+        contain.innerHTML += card
+    }
+}
+
+
+let figura2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
+
+let figura3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
+
+productos.push(figura2, figura3)
+
+console.log(productos)
+
+productos.forEach(e => {
+    e.cardFiguras()
+})
+
+let borrarParrafo = document.getElementById('parrafo')
+//console.log(borrarParrafo)
+borrarParrafo.remove()
+
+
+
+
+
+
 
 
 

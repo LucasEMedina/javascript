@@ -1117,3 +1117,257 @@ class Prestamo {
   alert(
     `El banco que ofrece la tasa mas baja es ${bancoMenorTasa.nombre} con un valor de $${cuotaMensualTotal} por mes`
   )
+
+
+
+  /////     CLASE 8  DOM (Con HTML)
+
+  /*
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 id="titulo" class="clasetitulo">DOM h1</h1>
+    <h1 class="clasetitulo2"> PRUEBA </h1>
+    <h2 id="tituloh2" class="clasetitulo">DOM h2</h2>
+    <div id="div"></div>
+    <script src="index.js"></script>
+</body>
+</html>
+*/
+
+  //console.log(document)
+//console.log(document.body)
+
+let titulo1 = document.getElementById('titulo')
+// console.log(titulo1)
+
+//const titulos = document.getElementsByTagName('h1')
+//console.log(titulos)
+
+// const titulo3 = document.getElementsByClassName('clasetitulo')
+// console.log(titulo3)
+
+//clase
+// const tituloQueryClass = document.querySelectorAll('.clasetitulo')
+
+// // id
+const tituloQueryId = document.querySelectorAll('h1')
+// const tituloQueryEtiqueta = document.querySelector('h1.clasetitulo2')
+
+// console.log(tituloQueryEtiqueta)
+
+//titulo1.innerText = 'DOM MODIFICADO'
+//titulo1.innerHTML = '<h4>DOM</h4>'
+
+for (const elemento of tituloQueryId) {
+    elemento.innerText = 'Cambiado'
+}
+
+
+const parrafo = document.createElement('p')
+parrafo.innerText = 'Parrafo creado desde JS'
+
+const divPrueba = document.getElementById('div')
+divPrueba.append(parrafo)
+titulo1.remove()
+
+
+
+//////    CLASE 9 EVENTOS  (Con HTML)
+
+
+/* Esto va en el HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div1"></div>
+    <button id="boton1">PRIMER BOTON</button>
+    <!-- <input type="text" id="input1"> -->
+    <form id="form">
+        <input type="text" id="name" placeholder="ingresa nombre">
+        <input type="text" id="lastname" placeholder="ingresa apellido">
+        <input type="text" id="deporte" placeholder="ingresa deporte favorito">
+        <input type="submit" value="INGRESAR">
+    </form>
+    <script src="index.js"></script>
+</body>
+</html>
+*/
+
+const boton1 = document.getElementById('boton1')
+const div1 = document.querySelector('.div1')
+const input1 = document.getElementById('input1')
+//PRIMERA FORMA DE ESCUCHAR EVENTOS = addEventListener
+// boton1.addEventListener('click',clickFunction)
+
+// function clickFunction(){
+//     console.log('Haciendo click en primer boton')
+// }
+
+
+// div1.addEventListener('mousemove',mouveFunction)
+// function mouveFunction(){
+//     console.log('Moviendo el mouse en div azul')
+// }
+
+// div1.addEventListener('mouseover',overFunction)
+// function overFunction(){
+//     console.log('Over mouse en div azul')
+// }
+// div1.addEventListener('mouseout',outFunction)
+// function outFunction(){
+//     console.log('Out mouse en div azul')
+// }
+
+// div1.addEventListener('mouseout',()=>{
+//     console.log('Out mouse en div azul')
+// })
+
+
+// SEGUNDA FORMA DE ESCUCHAR EVENTOS = on
+
+boton1.onclick = () =>{
+    console.log('Haciendo click en primer boton')
+}
+
+// div1.onmousemove = () =>{
+//     console.log('Moviendo el mouse en div azul')
+// }
+
+div1.onmouseover = ()=>{
+    console.log('Over mouse en div azul')
+}
+
+div1.onmouseout = () =>{
+    console.log('Out mouse en div azul')
+}
+
+// input1.onchange = (e) =>{
+// console.log(e.target.value)
+// }
+// input1.oninput = (event) =>{
+//     console.log(event.target.value)
+//     //console.log('evento input')
+//     }
+// input1.onkeydown = (event)=>{
+//     if(event.code==='Enter'){
+//         console.log('Tecla enter')
+//     }
+//     console.log(event.code)
+// }
+
+
+const formulario = document.getElementById('form')
+formulario.onsubmit = (e)=>{
+    e.preventDefault()
+    console.log(e)
+    // console.log(e.target.children[0].value)
+    // console.log(e.target.children[1].value)
+    // console.log(e.target.children[2].value)
+
+    Array.from(e.target.children).forEach(elemento=>{
+        console.log(elemento.value)
+    })
+}
+
+
+/// EJEMPLO
+
+/*  HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select name="lista" id="lista"></select>
+    <script src="ejemploDOM.js"></script>
+</body>
+</html>
+*/
+
+let productos = []
+
+const selectTag = document.getElementById('lista')
+
+const iphone = {
+  id: 1,
+  nombre: 'Iphone',
+  precio: 650,
+}
+productos.push(iphone)
+const tv = {
+  id: 2,
+  nombre: 'TV',
+  precio: 350,
+}
+productos.push(tv)
+const ipad = {
+  id: 3,
+  nombre: 'Ipad',
+  precio: 250,
+}
+productos.push(ipad)
+const computador = {
+  id: 4,
+  nombre: 'Computador',
+  precio: 1200,
+}
+productos.push(computador)
+
+console.log(productos)
+
+productos.forEach((producto) => {
+  const option = document.createElement('option')
+  option.innerText = `${producto.nombre}: $${producto.precio}`
+  option.setAttribute('id', `${producto.id}`)
+  //option.innerText = producto.nombre+": $"+producto.precio
+  selectTag.append(option)
+})
+
+//EVENTOS
+
+let carrito = []
+
+const boton = document.createElement('button')
+boton.innerText = 'SEGUIR COMPRANDO'
+document.body.append(boton)
+
+const boton2 = document.createElement('button')
+boton2.innerText = 'TERMINAR COMPRA'
+document.body.append(boton2)
+
+boton.onclick = () => {
+  const productoSeleccionado = productos[selectTag.selectedIndex]
+  carrito.push(productoSeleccionado)
+}
+
+boton2.onclick = () => {
+  console.log(carrito)
+  let totalCompra = 0
+  carrito.forEach((prod) => {
+    totalCompra = totalCompra + prod.precio
+  })
+
+  //alert(`El precio total a pagar es ${totalCompra}`)
+  const p = document.createElement('p')
+  p.innerText = `El precio total a pagar es ${totalCompra}`
+  document.body.append(p)
+}
