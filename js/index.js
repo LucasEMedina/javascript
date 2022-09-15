@@ -264,16 +264,36 @@ while(precioDeLista){
 alert ("Gracias por visitar nuestro sitio!! Que tengas una buena jornada.") */
 
 
-/////   DESAFIO COMPLEMENTARIO DOM
+/////   DESAFIO ENTREGABLE DOM, EVENTOS
 
-const carrito = []
-const productos = []
+const divDatos = document.querySelector('.div-form')
+const inputNombre = document.getElementById('nombre')
+const inputApellido = document.getElementById('apellido')
+const inputEdad = document.getElementById('edad')
+const botonDatos = document.getElementById('boton-enviar')
+
+botonDatos.onclick = () =>{
+    const usuario = {
+        nombre : inputNombre.value,
+        apellido: inputApellido.value,
+        edad: inputEdad.value
+    }
+    localStorage.setItem('usuarioIngresado',JSON.stringify(usuario))
+    divDatos.remove()
+    console.log(usuario)
+}
+
+
+
+let carrito = []
+let productos = []
 
 class Figura{
     constructor(nombre, precio, img, id, desc = ''){
         this.nombre = nombre
         this.precio = precio
         this.img = img
+        this.id = id
         this.desc = desc
     }
     cardFiguras(){
@@ -286,31 +306,41 @@ class Figura{
                     <h4 class="card-precio">$${this.precio}</h4>
                 </div>
                 <div class="card-footer container-fluid">
-                    <button id=${this.id} type="button" class="btn btn-primary">COMPRAR</button>
+                    <button id=${this.id} type="button" class="btn btn-primary btncomprar">COMPRAR</button>
                 </div>
             </div>
         `
         const contain = document.getElementById('articulos')
-        contain.innerHTML += card
+        contain.innerHTML += card        
     }
+
+    eventos(){
+        const btncomprar = document.getElementById(this.id)
+        btncomprar.onclick = () =>{
+            console.log('Haciendo click en el boton comprar')
+        }
+        
+    }    
 }
 
+let figura1 = new Figura('Goku Super Saiayin', 13500, './multimedia/goku-super-saiayin.jpg', 01, 'Figura coleccionable de de Goku Super Saiayin contra Freezer, 30cm.')
 
 let figura2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
 
 let figura3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
 
-productos.push(figura2, figura3)
-
+productos.push(figura1,figura2, figura3)
 console.log(productos)
 
 productos.forEach(e => {
     e.cardFiguras()
 })
 
-let borrarParrafo = document.getElementById('parrafo')
-//console.log(borrarParrafo)
-borrarParrafo.remove()
+
+productos.forEach(e => {
+    e.eventos()
+})
+
 
 
 
