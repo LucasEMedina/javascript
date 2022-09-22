@@ -23,7 +23,23 @@
 
         <nav class="nav">
 
-            <a href="/index.html" title="carrito de compras iconos"><img class="icon-carrito" src="./multimedia/agregar-carrito.png" alt="carrito de compras"><span id="contadorCarrito"></span></a>
+            <ul class="navbar-nav">
+                <li class="nav-item nav-carrito">
+                    <a class="nav-link active" aria-current="page" href="#">
+                        <img class="icon-carrito" src="./multimedia/agregar-carrito.png" alt="carrito de compras"><span id="contadorCarrito"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a id="finCompra" class="dropdown-item" href="#">FINALIZAR COMPRA</a>
+                    </li>                  
+                </ul>
+              </li>
+            </ul>
            
         </nav>
 
@@ -44,12 +60,11 @@
 
         <h2 class="titulo-productos">ACTION FIGURES OF ANIME</h2>
 
-        <article id="articulos">
+        <article id="articulos"></article> <!-- aca van las cards mediante JS -->
+        
+        <div id="detalleDeCompra"></div>
 
-                    
-
-        </article>
-
+        <div id="mediosDePago"></div>
         
 
     </main>

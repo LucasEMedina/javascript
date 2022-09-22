@@ -56,20 +56,20 @@ header{
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
+    flex-direction: row;
 }
 
-.nav-ul{
+.navbar-nav{
     display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 20px;
+    flex-direction: row;
+}
+
+.nav-carrito{
+    margin-right: 10px;
 }
 
 .icon-carrito{
     width: 30px;
-    /* margin: 10px; */
 }
 
 #contadorCarrito{
@@ -176,4 +176,5 @@ header{
     align-items: center;
     text-align: center;
     justify-content: flex-start;
+    position: static;
 }

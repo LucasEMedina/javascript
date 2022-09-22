@@ -266,7 +266,7 @@ alert ("Gracias por visitar nuestro sitio!! Que tengas una buena jornada.") */
 
 /////   DESAFIO ENTREGABLE DOM, EVENTOS
 
-const divDatos = document.querySelector('.div-form')
+/* const divDatos = document.querySelector('.div-form')
 const inputNombre = document.getElementById('nombre')
 const inputApellido = document.getElementById('apellido')
 const inputEdad = document.getElementById('edad')
@@ -339,8 +339,133 @@ productos.forEach(e => {
 
 productos.forEach(e => {
     e.eventos()
+}) */
+
+
+/////// ------ SEGUNDA ENTREGA DEL PROYECTO FINAL
+
+const divForm = document.querySelector('.div-form')
+const inputNombre = document.getElementById('nombre')
+const inputApellido = document.getElementById('apellido')
+const inputEdad = document.getElementById('edad')
+const botonDatos = document.getElementById('boton-enviar')
+
+botonDatos.onclick = () =>{
+    const usuario = {
+        nombre : inputNombre.value,
+        apellido: inputApellido.value,
+        edad: inputEdad.value
+    }
+    localStorage.setItem('usuarioIngresado',JSON.stringify(usuario))
+    divForm.remove()
+    console.log(usuario)
+}
+
+
+
+let carrito = []
+let productos = []
+
+class Figura{
+    constructor(nombre, precio, img, id, desc = ''){
+        this.nombre = nombre
+        this.precio = precio
+        this.img = img
+        this.id = id
+        this.desc = desc
+    }
+    cardFiguras(){
+        const card = `
+            <div class="card-container">
+                <img src=${this.img} class="card-img-top" alt="${this.nombre}">
+                <div class="card-body">
+                    <h3 class="card-title">${this.nombre}</h3>
+                    <p class="card-text">${this.desc} </p>
+                    <h4 class="card-precio">$${this.precio}</h4>
+                </div>
+                <div class="card-footer container-fluid">
+                    <button id=${this.id} type="button" class="btn btn-primary btncomprar">COMPRAR</button>
+                </div>
+            </div>
+        `
+        const contain = document.getElementById('articulos')
+        contain.innerHTML += card        
+    }
+    eventoCarrito(){
+        const btncomprar = document.getElementById(this.id)
+        
+        const productoAgregado = productos.find(product => product.id == this.id)
+
+        btncomprar.onclick = () => enElCarrito(productoAgregado)        
+    }
+}
+
+let figura1 = new Figura('Goku Super Saiayin', 13500, './multimedia/goku-super-saiayin.jpg', 01, 'Figura coleccionable de de Goku Super Saiayin contra Freezer, 30cm.')
+
+let figura2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
+
+let figura3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
+
+productos.push(figura1,figura2, figura3)
+console.log(productos)
+
+productos.forEach(e => {
+    e.cardFiguras()
 })
 
+productos.forEach(e => {
+    e.eventoCarrito()
+})
+
+
+function enElCarrito(producto) {
+
+    const enElCarrito = carrito.find(prod =>prod.id == producto.id)
+    
+    if(!enElCarrito){
+        carrito.push({...producto, cantidad: 1})
+    } else {
+        let filtrarCarrito = carrito.filter(prod => prod.id != producto.id)
+        carrito = [...filtrarCarrito, {...enElCarrito, cantidad: enElCarrito.cantidad + 1}]
+    }
+
+    contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
+
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+    console.log(carrito)
+}
+
+const contador = document.getElementById('contadorCarrito')
+contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
+
+const detalleDeCompra = document.getElementById('detalleDeCompra')
+const mediosDePago = document.getElementById('mediosDePago')
+const finalizarCompra = document.getElementById('finCompra')
+
+finalizarCompra.onclick = () => {
+    if(carrito.length != 0){
+        const articulos = document.getElementById('articulos')
+        articulos.remove()
+
+        const tituloCompra = document.createElement ('h3')
+        const infoUss = JSON.parse(localStorage.getItem('usuarioIngresado'))
+        tituloCompra.innerText = `Hola ${infoUss.nombre} ${infoUss.apellido}, esta es tu compra.`
+        detalleDeCompra.append(tituloCompra)
+
+        carrito.forEach((producto) => {
+        const parrafoDetalle = document.createElement ('p')
+        parrafoDetalle.innerText = `Figura coleccionable ${producto.nombre}, ${producto.cantidad}, $${producto.precio} (cada una)`
+        detalleDeCompra.append(parrafoDetalle)
+        })
+
+        let totalCompra = carrito.reduce((acc, prod) => acc + prod.precio, 0)
+        console.log(totalCompra)
+
+        const compraTotal = document.createElement ('p')
+        compraTotal.innerText = `El total de la compra es de $${totalCompra}`
+        detalleDeCompra.append(compraTotal)
+    }
+}
 
 
 

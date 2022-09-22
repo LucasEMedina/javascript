@@ -1372,6 +1372,259 @@ boton2.onclick = () => {
   document.body.append(p)
 }
 
+
+
+/////////// ------  CLASE 10 Storage y JSON -----
+
+///---- HTML ----
+/* <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="titulo">BIENVENIDO</h1>
+    <h2 id="titulo2">Ingresa tus datos</h2>
+    <form id="formInicial">
+      <input type="text" name="name" id="name" placeholder="name" />
+      <input type="text" name="lastname" id="lastname" placeholder="lastname" />
+      <input type="text" name="email" id="email" placeholder="email" />
+      <input type="number" name="edad" id="edad" placeholder="edad" />
+      <input type="submit" value="ENVIAR" />
+    </form>
+    <script src="ejercicio.js"></script>
+  </body>
+</html>
+ */
+
+/// ---- CODE ----
+
+localStorage.setItem('name','Jose')
+localStorage.setItem('lastname','Mendoza')
+localStorage.setItem('email','jmendoza@mail.com')
+localStorage.setItem('edad',33)
+//localStorage.setItem('name','Alejo')
+localStorage.setItem('esCasado',true)
+const nombre = localStorage.getItem('name')
+const edad = localStorage.getItem('edad')
+console.log(edad)
+//console.log(localStorage.length)
+localStorage.clear()
+//localStorage.removeItem('email')
+
+// console.log(localStorage.key(0))
+// console.log(localStorage.key(1))
+// console.log(localStorage.key(2))
+// console.log(localStorage.key(3))
+
+// for (let i = 0; i<localStorage.length;i++) {
+//     const keyStorage = localStorage.key(i)
+//     console.log(keyStorage)
+//     console.log(localStorage.getItem(keyStorage))
+// }
+
+const informacionPersonal = {
+    mascotas : ['firulais','mishu','pique'],
+    name:'Jose',
+    lastname:'Mendoza',
+    email:'jmendoza@mail.com',
+    edad:33,
+    esCasado: true
+}
+const infoPersonalJSON = JSON.stringify(informacionPersonal)
+//console.log('----JAVASCRIPT-----',informacionPersonal)
+//console.log('-----JSON-----',infoPersonalJSON)
+// JSON.parse()
+// JSON.stringify()
+
+localStorage.setItem('informacionPersonal',infoPersonalJSON)
+
+const infoBack = localStorage.getItem('informacionPersonal')
+const infoBackParse = JSON.parse(infoBack)
+console.log(infoBackParse)
+
+//// ----EJERCICIO ---
+
+const titulo = document.getElementById('titulo2')
+const formulario = document.getElementById('formInicial')
+
+formulario.onsubmit = (event)=>{
+event.preventDefault()
+//console.log(event.target.children)
+const informacionArray = []
+for (const input of event.target.children) {
+    //console.log(input)
+    const obj = {}
+    obj['tipo'] = input.name
+    obj['valor'] = input.value
+    informacionArray.push(obj)
+    // console.log(obj)
+}
+console.log(informacionArray)
+localStorage.setItem('info',JSON.stringify(informacionArray))
+}
+if(localStorage.length>0){
+const informacion = JSON.parse(localStorage.getItem('info'))
+
+let nombre = ''
+let apellido = ''
+informacion.forEach(dato=>{
+   if (dato.tipo==='name'){
+       nombre = dato.valor
+    }
+    if (dato.tipo==='lastname'){
+        apellido = dato.valor
+    }
+})
+console.log('name',nombre)
+console.log('lastname',apellido)
+if(nombre!=='' || apellido!==''){
+titulo.innerText = `Hola ${nombre} ${apellido}, bienvenido de vuelta`
+}
+}
+
+
+
+//////// -------- CLASE 11 -- WORKSHOP ---
+
+/// --- HTML ---
+
+/* <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="divPrincipal">
+      <div class="divDatos">
+        <h2>BIENVENIDO A INVERSIONES JS, INGRESA TUS DATOS</h2>
+        Nombre:<input type="text" name="nombre" id="nombre" /> 
+        Apellido:<input
+          type="text"
+          name="apellido"
+          id="apellido"
+        />
+        <button id="botonIngresar">INGRESAR</button>
+      </div>
+      <div id="divSaludo">
+      </div>
+      <div id="divInversion"></div>
+      <div id="divResultados"></div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
+ */
+
+////----- CODE ---
+
+const inputNombre = document.getElementById('nombre')
+const inputApellido = document.querySelector('#apellido')
+const botonIngresar = document.getElementById('botonIngresar')
+const divDatos = document.querySelector('.divDatos')
+const divSaludo = document.querySelector('#divSaludo')
+const divInversion = document.querySelector('#divInversion')
+const divResultados = document.querySelector('#divResultados')
+// array de bancos
+const bancos = []
+// tipos de riesgo
+const riesgos = [
+  { tipo: 'bajo', tasa: 0.5 },
+  { tipo: 'medio', tasa: 0.8 },
+  { tipo: 'alto', tasa: 1.5 },
+]
+//clase banco para crear distintos bancos
+
+class Banco {
+  constructor(nombre) {
+    this.nombre = nombre
+    this.rendimiento = this.calculadoraRendimiento()
+  }
+  calculadoraRendimiento() {
+    return Math.floor(Math.random() * 20) + 1
+  }
+}
+
+bancos.push(new Banco('Bancolombia'))
+bancos.push(new Banco('Davivienda'))
+bancos.push(new Banco('Bogota'))
+bancos.push(new Banco('Itau'))
+
+console.log(bancos)
+
+botonIngresar.onclick = () => {
+  const usuario = {
+    nombre: inputNombre.value,
+    apellido: inputApellido.value,
+  }
+  localStorage.setItem('usuarioStorage', JSON.stringify(usuario))
+  divDatos.remove()
+  crearSaludo(usuario)
+  crearInversionDiv()
+  const botonCalcular = document.querySelector('#botonCalcular')
+  botonCalcular.onclick = () => {
+    const monto = document.querySelector('#inputMonto').value
+    const riesgoEscogido = document.querySelector('#selectRiesgo').value
+    const riesgo = riesgos.find((riesgo) => riesgo.tipo === riesgoEscogido).tasa
+    console.log(riesgo)
+    
+    bancos.forEach((banco) => {
+      const rendimientoFinal = banco.rendimiento * riesgo
+      const utilidades = monto * rendimientoFinal
+      const parrafoBanco = document.createElement('p')
+      parrafoBanco.innerText = `El banco ${banco.nombre} te ofrece un rendimiento anual de ${rendimientoFinal}% lo que te generaria unas utilidades de ${utilidades} pesos`
+      divResultados.append(parrafoBanco)
+    })
+  }
+}
+
+function crearSaludo(user) {
+  const saludarTitulo = document.createElement('h2')
+  saludarTitulo.innerText = `Bienvenido ${user.nombre} ${user.apellido}, estas listo para invertir?`
+  divSaludo.append(saludarTitulo)
+}
+
+function crearInversionDiv() {
+  // parrafo
+  const parrafo = document.createElement('p')
+  parrafo.innerText =
+    'Coloca el monto a invertir y el tipo de riesgo que quieres asumir'
+  // input monto a invertir
+  const inputMonto = document.createElement('input')
+  inputMonto.setAttribute('type', 'number')
+  inputMonto.setAttribute('id', 'inputMonto')
+
+  // boton para calcular ls opciones de inversion
+  const botonCalcular = document.createElement('button')
+  botonCalcular.innerText = 'CALCULAR'
+  botonCalcular.setAttribute('id', 'botonCalcular')
+  // select con los tipos de riesgos
+  const selectRiesgo = document.createElement('select')
+  selectRiesgo.setAttribute('id', 'selectRiesgo')
+  //creando las opciones del select con los tres tipos de riesgos
+  riesgos.forEach((riesgo) => {
+    const option = document.createElement('option')
+    option.innerText = `${riesgo.tipo}`
+    selectRiesgo.append(option)
+  })
+
+  // anadiendo los elementos al dom
+  divInversion.append(parrafo)
+  divInversion.append(inputMonto)
+  divInversion.append(selectRiesgo)
+  divInversion.append(botonCalcular)
+}
+
+
+
+
+
 ////////////////////////////// PARA EL PROYECTO FINAL ------/////
 /* 
 let carrito = []
