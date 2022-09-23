@@ -461,6 +461,17 @@ finalizarCompra.onclick = () => {
         let totalCompra = carrito.reduce((acc, prod) => acc + prod.precio, 0)
         console.log(totalCompra)
 
+        //-- Para desafio complementario --- Operadores Avanzados ---
+        
+        function compraPorMayor (compra){
+            return compra <= 40000 ? 'No supera la compra minima.' : 'Califica como compra por mayor.'
+        }
+        console.log (compraPorMayor(totalCompra))
+
+        let envioEnCaja = carrito.reduce((acc, prod) => acc + prod.cantidad, 0) >= 5 && 'Preparar caja para envio'
+        console.log(envioEnCaja)
+        
+
         const compraTotal = document.createElement ('p')
         compraTotal.innerText = `El total de la compra es de $${totalCompra}`
         detalleDeCompra.append(compraTotal)
