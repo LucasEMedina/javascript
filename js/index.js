@@ -396,7 +396,17 @@ class Figura{
         
         const productoAgregado = productos.find(product => product.id == this.id)
 
-        btncomprar.onclick = () => enElCarrito(productoAgregado)        
+        btncomprar.onclick = () => {
+            enElCarrito(productoAgregado) 
+
+            Toastify({
+                text: "Producto agregado al carrito!",
+                duration: 1000,
+                style: {
+                  background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+              }).showToast();
+        }
     }
 }
 
@@ -475,10 +485,29 @@ finalizarCompra.onclick = () => {
         const compraTotal = document.createElement ('p')
         compraTotal.innerText = `El total de la compra es de $${totalCompra}`
         detalleDeCompra.append(compraTotal)
+
+        const comprar = document.createElement('button')
+        comprar.innerText = 'Comprar'
+        
+
+        comprar.onclick = () => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Compra realizada!',
+                text: 'Es hora de disfrutar tus figuras de accion!!',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
+              })
+        }
+        detalleDeCompra.append(comprar)
+
     }
+
 }
-
-
 
 
 
