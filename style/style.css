@@ -59,17 +59,18 @@ header{
     flex-direction: row;
 }
 
-.navbar-nav{
-    display: flex;
-    flex-direction: row;
+.nav{
+    margin-right: 20px;
 }
 
-.nav-carrito{
-    margin-right: 10px;
+#botonCarrito{
+    border: none;
+    background-color: #fff;
 }
 
 .icon-carrito{
     width: 30px;
+    
 }
 
 #contadorCarrito{
@@ -82,6 +83,11 @@ header{
     font-family: Arial, sans-serif;
     font-size: 13px;
     text-align: center;
+}
+
+.modal-header{
+    display: flex;
+    flex-direction: column;
 }
 
 .div-form{

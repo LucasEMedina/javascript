@@ -350,13 +350,13 @@ const inputApellido = document.getElementById('apellido')
 const inputEdad = document.getElementById('edad')
 const botonDatos = document.getElementById('boton-enviar')
 
-botonDatos.onclick = () =>{
+botonDatos.onclick = () => {
     const usuario = {
-        nombre : inputNombre.value,
+        nombre: inputNombre.value,
         apellido: inputApellido.value,
         edad: inputEdad.value
     }
-    localStorage.setItem('usuarioIngresado',JSON.stringify(usuario))
+    localStorage.setItem('usuarioIngresado', JSON.stringify(usuario))
     divForm.remove()
     console.log(usuario)
 }
@@ -366,15 +366,15 @@ botonDatos.onclick = () =>{
 let carrito = []
 let productos = []
 
-class Figura{
-    constructor(nombre, precio, img, id, desc = ''){
+class Figura {
+    constructor(nombre, precio, img, id, desc = '') {
         this.nombre = nombre
         this.precio = precio
         this.img = img
         this.id = id
         this.desc = desc
     }
-    cardFiguras(){
+    cardFiguras() {
         const card = `
             <div class="card-container">
                 <img src=${this.img} class="card-img-top" alt="${this.nombre}">
@@ -389,14 +389,14 @@ class Figura{
             </div>
         `
         const contain = document.getElementById('articulos')
-        contain.innerHTML += card        
+        contain.innerHTML += card
     }
-    eventoCarrito(){
+    eventoCarrito() {
         const btncomprar = document.getElementById(this.id)
-        
+
         const productoAgregado = productos.find(product => product.id == this.id)
 
-        btncomprar.onclick = () => enElCarrito(productoAgregado)        
+        btncomprar.onclick = () => enElCarrito(productoAgregado)
     }
 }
 
@@ -406,7 +406,7 @@ let figura2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.j
 
 let figura3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
 
-productos.push(figura1,figura2, figura3)
+productos.push(figura1, figura2, figura3)
 console.log(productos)
 
 productos.forEach(e => {
@@ -420,13 +420,13 @@ productos.forEach(e => {
 
 function enElCarrito(producto) {
 
-    const enElCarrito = carrito.find(prod =>prod.id == producto.id)
-    
-    if(!enElCarrito){
-        carrito.push({...producto, cantidad: 1})
+    const enElCarrito = carrito.find(prod => prod.id == producto.id)
+
+    if (!enElCarrito) {
+        carrito.push({ ...producto, cantidad: 1 })
     } else {
         let filtrarCarrito = carrito.filter(prod => prod.id != producto.id)
-        carrito = [...filtrarCarrito, {...enElCarrito, cantidad: enElCarrito.cantidad + 1}]
+        carrito = [...filtrarCarrito, { ...enElCarrito, cantidad: enElCarrito.cantidad + 1 }]
     }
 
     contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
@@ -438,44 +438,69 @@ function enElCarrito(producto) {
 const contador = document.getElementById('contadorCarrito')
 contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
 
-const detalleDeCompra = document.getElementById('detalleDeCompra')
+//const detalleDeCompra = document.getElementById('detalleDeCompra')
 const mediosDePago = document.getElementById('mediosDePago')
-const finalizarCompra = document.getElementById('finCompra')
+const botonCarrito = document.getElementById('botonCarrito')
+const modalBody = document.getElementById('modal-body')
 
-finalizarCompra.onclick = () => {
-    if(carrito.length != 0){
-        const articulos = document.getElementById('articulos')
-        articulos.remove()
+botonCarrito.onclick = () => {
 
-        const tituloCompra = document.createElement ('h3')
-        const infoUss = JSON.parse(localStorage.getItem('usuarioIngresado'))
-        tituloCompra.innerText = `Hola ${infoUss.nombre} ${infoUss.apellido}, esta es tu compra.`
-        detalleDeCompra.append(tituloCompra)
+    /* Swal.fire({
+        title: 'Detalles de la compra',
+        text: `Hola ${infoUss.nombre} ${infoUss.apellido}, esta es tu compra.`,
+
+        //carrito.forEach((producto) => {text: `Figura coleccionable ${producto.nombre}, ${producto.cantidad}, $${producto.precio} (cada una)`}),
+
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Si, Aceptar Compra!',
+        showCloseButton: true,
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+        }) */
+
+    const saludoUss = document.getElementById('saludoUss')
+    const infoUss = JSON.parse(localStorage.getItem('usuarioIngresado'))
+    saludoUss.innerText = `Hola ${infoUss.nombre} ${infoUss.apellido}, esta es tu compra.`
+    //detalleDeCompra.append(tituloCompra)
+    const carritoVacio = document.createElement('h5')
+    carritoVacio.innerText = 'No tienes productos en tu carrito!!'
+    modalBody.append(carritoVacio) 
+
+    if (carrito.length != 0) {
+        
+        carritoVacio.remove()
 
         carrito.forEach((producto) => {
-        const parrafoDetalle = document.createElement ('p')
-        parrafoDetalle.innerText = `Figura coleccionable ${producto.nombre}, ${producto.cantidad}, $${producto.precio} (cada una)`
-        detalleDeCompra.append(parrafoDetalle)
+            const parrafoDetalle = document.createElement('p')
+            parrafoDetalle.innerText = `Figura coleccionable ${producto.nombre}, ${producto.cantidad}, $${producto.precio} (cada una)`
+            modalBody.append(parrafoDetalle)
         })
 
         let totalCompra = carrito.reduce((acc, prod) => acc + prod.precio, 0)
         console.log(totalCompra)
 
+        const compraTotal = document.createElement('h5')
+        compraTotal.innerText = `El total de la compra es de $${totalCompra}`
+        modalBody.append(compraTotal)
+
         //-- Para desafio complementario --- Operadores Avanzados ---
-        
-        function compraPorMayor (compra){
+
+        function compraPorMayor(compra) {
             return compra <= 40000 ? 'No supera la compra minima.' : 'Califica como compra por mayor.'
         }
-        console.log (compraPorMayor(totalCompra))
+        console.log(compraPorMayor(totalCompra))
 
         let envioEnCaja = carrito.reduce((acc, prod) => acc + prod.cantidad, 0) >= 5 && 'Preparar caja para envio'
         console.log(envioEnCaja)
         
-
-        const compraTotal = document.createElement ('p')
-        compraTotal.innerText = `El total de la compra es de $${totalCompra}`
-        detalleDeCompra.append(compraTotal)
+        //articulos.remove()
     }
+
+    
 }
 
 

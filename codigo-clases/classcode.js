@@ -1624,81 +1624,242 @@ function crearInversionDiv() {
 
 
 
+//////------ CLASE 12 --- OPERADORES AVANZADOS ---
 
-////////////////////////////// PARA EL PROYECTO FINAL ------/////
-/* 
-let carrito = []
-let productos = []
+const equipos = [
+  { id: 1, tecnicoDeFutbolId: 6, ciudadDelEquipoId: 1, numeroJugadores: 56 },
+  { id: 2, tecnicoDeFutbolId: 1, ciudadDelEquipoId: 4, numeroJugadores: 30 },
+  { id: 3, tecnicoDeFutbolId: 5, ciudadDelEquipoId: 2, numeroJugadores: 20 },
+  { id: 4, tecnicoDeFutbolId: 2, ciudadDelEquipoId: 3, numeroJugadores: 84 },
+  { id: 5, tecnicoDeFutbolId: 3, ciudadDelEquipoId: 1, numeroJugadores: 77 },
+  { id: 6, tecnicoDeFutbolId: 5, ciudadDelEquipoId: 2, numeroJugadores: 92 },
+  { id: 7, tecnicoDeFutbolId: 3, ciudadDelEquipoId: 2, numeroJugadores: 36 },
+  { id: 8, tecnicoDeFutbolId: 2, ciudadDelEquipoId: 3, numeroJugadores: 25 },
+  { id: 9, tecnicoDeFutbolId: 4, ciudadDelEquipoId: 4, numeroJugadores: 11 },
+  { id: 10, tecnicoDeFutbolId: 5, ciudadDelEquipoId: 1, numeroJugadores: 70 },
+  { id: 11, tecnicoDeFutbolId: 1, ciudadDelEquipoId: 1, numeroJugadores: 76 },
+  { id: 12, tecnicoDeFutbolId: 5, ciudadDelEquipoId: 2, numeroJugadores: 34 },
+  { id: 13, tecnicoDeFutbolId: 6, ciudadDelEquipoId: 3, numeroJugadores: 16 },
+  { id: 14, tecnicoDeFutbolId: 2, ciudadDelEquipoId: 3, numeroJugadores: 30 },
+  { id: 15, tecnicoDeFutbolId: 3, ciudadDelEquipoId: 2, numeroJugadores: 18 },
+  { id: 16, tecnicoDeFutbolId: 3, ciudadDelEquipoId: 1, numeroJugadores: 17 },
+  { id: 17, tecnicoDeFutbolId: 4, ciudadDelEquipoId: 2, numeroJugadores: 100 },
+  { id: 18, tecnicoDeFutbolId: 2, ciudadDelEquipoId: 3, numeroJugadores: 45 },
+  { id: 19, tecnicoDeFutbolId: 5, ciudadDelEquipoId: 1, numeroJugadores: 69 },
+  { id: 20, tecnicoDeFutbolId: 1, ciudadDelEquipoId: 1, numeroJugadores: 42 },
+  { id: 21, tecnicoDeFutbolId: 5, ciudadDelEquipoId: 3, numeroJugadores: 20 },
+  { id: 22, tecnicoDeFutbolId: 6, ciudadDelEquipoId: 2, numeroJugadores: 58 },
+  { id: 23, tecnicoDeFutbolId: 2, ciudadDelEquipoId: 2, numeroJugadores: 75 },
+]
+const ciudadDelEquipo = [
+  { id: 1, name: 'LIMA' },
+  { id: 2, name: 'BOGOTA' },
+  { id: 3, name: 'SANTIAGO' },
+  { id: 4, name: 'ASUNCION' },
+]
 
-class Figura{
-    constructor(nombre, precio, img, id, desc = ''){
-        this.nombre = nombre
-        this.precio = precio
-        this.img = img
-        this.id = id
-        this.desc = desc
-    }
-    cardFiguras(){
-        const card = `
-            <div class="card-container">
-                <img src=${this.img} class="card-img-top" alt="${this.nombre}">
-                <div class="card-body">
-                    <h3 class="card-title">${this.nombre}</h3>
-                    <p class="card-text">${this.desc} </p>
-                    <h4 class="card-precio">$${this.precio}</h4>
-                </div>
-                <div class="card-footer container-fluid">
-                    <button id=${this.id} type="button" class="btn btn-primary btncomprar">COMPRAR</button>
-                </div>
-            </div>
-        `
-        const contain = document.getElementById('articulos')
-        contain.innerHTML += card
-    }
-    eventoCarrito(){
-        const btncomprar = document.getElementById(this.id)
-        
-        const productoAgregado = productos.find(product => product.id == this.id)
+// OPERADOR ++
 
-        btncomprar.addEventListener('click', () => enElCarrito(productoAgregado))
-    }
+let total = 10
+//total = total + 1  //opcion 1
+//total++ // opcion 2
+
+equipos.forEach((equipo) => equipo.numeroJugadores++)
+//console.log(equipos)
+
+// OPERADOR TERNARIO
+
+// if(nombre){   /// 1.condicion
+//     return 'hola' //2. que hacer si condicion se cumple
+// } else {
+//     return 'chao' // 3. que hacer si condicion no se cumple
+// }
+
+// function numTotal(total){
+// let jugadores = 0
+// if(total>20){
+//     jugadores = 30
+//     //return('Numero mayor a 20')
+// } else {
+//     jugadores = 10
+//     //return('Numero menor o igual a 20')
+// }
+// return jugadores
+// }
+
+// function numTotalTernario(total){
+//     //return total>20 ? 'Numero mayor a 20' : 'Numero menor o igual a 20'
+//     let jugadores = total>20 ? 30 : 10
+//     return jugadores
+//       //    condicion   ?    que hacer si condicion se cumple : que hacer si condicion no se cumple
+
+// }
+//console.log(numTotal(22))
+//console.log(numTotalTernario(22))
+
+function numJugadores(id) {
+  const equipo = equipos.find((equipo) => equipo.id === id)
+  if (equipo.numeroJugadores < 30) {
+    return 'Faltan jugadores por contratar'
+  } else if (equipo.numeroJugadores >= 30 && equipo.numeroJugadores <= 50) {
+    return 'Tiene cantidad necesaria de jugadores'
+  } else {
+    return 'Necesita ceder jugadores'
+  }
 }
 
-let figura1 = new Figura('Goku Super Saiayin', 13500, './multimedia/goku-super-saiayin.jpg', 01, 'Figura coleccionable de de Goku Super Saiayin contra Freezer, 30cm.')
-
-let figura2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
-
-let figura3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
-
-productos.push(figura1,figura2, figura3)
-console.log(productos)
-
-productos.forEach(e => {
-    e.cardFiguras()
-})
-
-productos.forEach(e => {
-    e.eventoCarrito()
-})
-
-function enElCarrito(producto) {
-
-    const enElCarrito = carrito.find(prod =>prod.id == producto.id)
-
-    if(!enElCarrito){
-        carrito.push({...producto, cantidad: 1})
-    } else {
-        let filtrarCarrito = carrito.filter(prod => prod.id != producto.id)
-        carrito = [...filtrarCarrito, {...enElCarrito, cantidad: enElCarrito.cantidad + 1}]
-    }
-
-    contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
-
-    console.log(carrito)
+function numJugadoresTer(id) {
+  const equipo = equipos.find((equipo) => equipo.id === id)
+  return equipo.numeroJugadores < 30
+    ? 'Faltan jugadores por contratar'
+    : equipo.numeroJugadores >= 30 && equipo.numeroJugadores <= 50
+    ? 'Tiene cantidad necesaria de jugadores'
+    : 'Necesita ceder jugadores'
 }
 
-const contador = document.getElementById('contadorCarrito')
-contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
- */
+//console.log(numJugadores(2))
+//console.log(numJugadoresTer(2))
 
-///////////-----------------------///////////////////-------
+// Operador AND &&
+
+let numero = 10
+
+//if(numero>5) alert('Numero mayor a 5')
+
+//let prueba = numero > 5 && 10
+//console.log('----prueba-----',prueba)
+
+//Operador OR ||
+function operadorOr(parametro){
+    return parametro || 4
+}
+
+let parametro = numero || 4
+//console.log(parametro)
+
+// Acceso condicional a un objeto
+//console.log(equipos[23]?.id || 'este equipo no existe')
+
+
+// Destructuracion
+
+// let estudiante = {
+//     nombre:'Farid',
+//     apellido:'Gutierrez',
+//     idioma: 'Espanol',
+//     curso:'Javascript',
+//     edad: 33
+// }
+// let notas = {
+//     nota1: 5,
+//     nota2: 3.5
+// }
+// function saludar(estudiante){
+// console.log(`hola mi nombre ${estudiante.nombre} ${estudiante.apellido} yo estoy en el curso de ${estudiante.curso}`)
+// }
+// //saludar(estudiante)
+
+// function saludarDes(estudiante){
+// const {nombre,apellido,curso} = estudiante
+// // const nombre = estudiante.nombre
+// // const apellido = estudiante.apellido
+// // const curso = estudiante.curso
+// console.log(`hola mi nombre ${nombre} ${apellido} yo estoy en el curso de ${curso}`)
+// }
+// //saludarDes(estudiante)
+
+// let animales = ['perro','gato','raton','elefante','culebra','pajaro']
+// //                 0       1      2        3          4         5
+// let personas = ['juan','carlos','andres']
+// function arrayDes(array){
+// const [,e1,,,,e2] = array
+// //console.log(e1,e2)
+
+// }
+// arrayDes(animales)
+
+// // spread operator
+// console.log(animales.concat(personas))
+// console.log([...animales,...personas])
+// console.log({...estudiante,...notas})
+
+let estudiante = {
+    nombre:'Farid',
+    apellido:'Gutierrez',
+    idioma: 'Espanol',
+    curso:'Javascript',
+    edad: 33
+}
+
+
+let copiaEstudiante = {...estudiante, id:5}
+copiaEstudiante.nombre = 'Juan'
+
+console.log(copiaEstudiante)
+console.log(estudiante)
+
+
+
+
+////// ------- CLASE 13 --- LIBRERIAS ---
+
+/* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <button id="swal">SWAL</button>
+    <button id="toast">TOAST</button>
+    <input type="text" name="nombre" id="nombre">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.3/build/global/luxon.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html> */
+
+
+
+const botonSwal = document.getElementById('swal')
+const botonToast = document.getElementById('toast')
+const inputNombre = document.getElementById('nombre')
+botonSwal.onclick = mostrarAlert
+botonToast.onclick = mostrarToast
+
+function mostrarAlert(){
+    Swal.fire({
+    title:'ALERTA',
+    text: 'Primera alerta',
+    icon: 'question',
+    showConfirmButton:false,
+    timer:3000
+    })
+
+}
+
+function mostrarToast(){
+    const nombreValue = inputNombre.value
+Toastify({
+text:`Hola ${nombreValue}`,
+duration:3000,
+position:'left'
+}).showToast()
+}
+
+
+const DateTime = luxon.DateTime
+
+const ahora = DateTime.now()
+console.log(ahora.setLocale('es').toLocaleString(DateTime.DATETIME_HUGE))
+
+const despues = ahora.plus({days:7})
+console.log(despues.setLocale('es').toLocaleString(DateTime.DATETIME_HUGE));
+
+const antes = ahora.minus({days:7})
+console.log(antes.setLocale('es').toLocaleString(DateTime.DATETIME_HUGE));
