@@ -396,7 +396,17 @@ class Figura {
 
         const productoAgregado = productos.find(product => product.id == this.id)
 
-        btncomprar.onclick = () => enElCarrito(productoAgregado)
+        btncomprar.onclick = () =>{
+            enElCarrito(productoAgregado) 
+
+            Toastify({
+                text: "Producto agregado al carrito!",
+                duration: 1000,
+                style: {
+                  background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+              }).showToast();
+        }
     }
 }
 
@@ -442,25 +452,9 @@ contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
 const mediosDePago = document.getElementById('mediosDePago')
 const botonCarrito = document.getElementById('botonCarrito')
 const modalBody = document.getElementById('modal-body')
+const botonComprar = document.getElementById('comprar')
 
 botonCarrito.onclick = () => {
-
-    /* Swal.fire({
-        title: 'Detalles de la compra',
-        text: `Hola ${infoUss.nombre} ${infoUss.apellido}, esta es tu compra.`,
-
-        //carrito.forEach((producto) => {text: `Figura coleccionable ${producto.nombre}, ${producto.cantidad}, $${producto.precio} (cada una)`}),
-
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Si, Aceptar Compra!',
-        showCloseButton: true,
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-        }
-        }) */
 
     const saludoUss = document.getElementById('saludoUss')
     const infoUss = JSON.parse(localStorage.getItem('usuarioIngresado'))
@@ -468,11 +462,13 @@ botonCarrito.onclick = () => {
     //detalleDeCompra.append(tituloCompra)
     const carritoVacio = document.createElement('h5')
     carritoVacio.innerText = 'No tienes productos en tu carrito!!'
-    modalBody.append(carritoVacio) 
+    modalBody.innerHTML = ''
+    modalBody.append(carritoVacio)
+
 
     if (carrito.length != 0) {
-        
-        carritoVacio.remove()
+
+        modalBody.innerHTML = ''
 
         carrito.forEach((producto) => {
             const parrafoDetalle = document.createElement('p')
@@ -480,7 +476,7 @@ botonCarrito.onclick = () => {
             modalBody.append(parrafoDetalle)
         })
 
-        let totalCompra = carrito.reduce((acc, prod) => acc + prod.precio, 0)
+        let totalCompra = carrito.reduce((acc, prod) => acc + (prod.precio * prod.cantidad), 0)
         console.log(totalCompra)
 
         const compraTotal = document.createElement('h5')
@@ -496,12 +492,81 @@ botonCarrito.onclick = () => {
 
         let envioEnCaja = carrito.reduce((acc, prod) => acc + prod.cantidad, 0) >= 5 && 'Preparar caja para envio'
         console.log(envioEnCaja)
+
         
-        //articulos.remove()
     }
 
+    botonComprar.onclick = () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Compra realizada!',
+            text: 'Es hora de disfrutar tus figuras de accion!!',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+    }
+}
+
+const btnTodos = document.getElementById('btn-todos')
+const divPersonajes = document.getElementById('div-personajes')
+const ingresarNombre = document.getElementById('name')
+const botonName = document.getElementById('botonName')
+
+
+
+botonName.onclick = async () =>{
+    let info
+    const nombreValue = ingresarNombre.value
+
+    if (nombreValue !== ''){
+    info = await fetch(`https://dragon-ball-super-api.herokuapp.com/api/characters/${nombreValue}`)
+}
+    const infoJson = await info.json()
+    const personaje = infoJson
+    crearCards(personaje)
     
 }
+
+btnTodos.onclick = async () => {
+    
+    const info = await fetch('https://dragon-ball-super-api.herokuapp.com/api/characters')
+    const infoJson = await info.json()
+    const personajes = infoJson
+    crearCards(personajes)    
+}
+
+
+
+function crearCards(result){
+    divPersonajes.innerHTML = ''
+    result.forEach((element) => {
+        const divCards = document.createElement('div')
+        divCards.setAttribute('class', 'card-personajes')
+        divCards.innerHTML = `
+            <div class="img-div">
+                <img src=${element.imageUrl} class="img-card">
+            </div>
+            <div class="body-card">
+                <h5 class="h5-card">${element.name}</h5>
+                <p class="text-card">Este personaje era un ${element.role}</p>
+            </div>
+            <ul class="ul-card list-group-flush">
+                <li class="li-card">Planeta de Origen: ${element.originplanet}</li>
+                <li class="li-card">Especie: ${element.specie}</li>
+                <li class="li-card">Status: ${element.status}</li>
+            </ul>
+            `
+    divPersonajes.append(divCards)            
+    })
+}
+
+
+
+
 
 
 

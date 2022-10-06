@@ -12,6 +12,9 @@
     <!-- Link Animation CSS para Sweet Alert -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
+    <!-- Toastify JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Curso de Javascript</title>
@@ -38,10 +41,10 @@
 
     </header>
     <!-- --- comienza el main --- -->
-    <main>
+    <main class="indexMain">
 
         <div class="div-form">
-            <h2 class="h2-form">BIEVENIDO, INGRESA TUS DATOS</h2>
+            <h2 class="h2-form">BIENVENIDO, INGRESA TUS DATOS</h2>
             <form class="form">
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre">
                 <input type="text" name="apellido" id="apellido" placeholder="Apellido">
@@ -54,6 +57,26 @@
         <h2 class="titulo-productos">ACTION FIGURES OF ANIME</h2>
 
         <article id="articulos"></article> <!-- aca van las cards mediante JS -->
+
+        <div>
+
+            <h3 class="h3-personajes">Buscar Personajes</h3>
+
+            <p class="p-personajes">
+                Aquí podras buscar todos los personajes de tu Anime favorito, haciendo 'Click' en el botón "Buscar Todos". O puedes buscar tu personaje preferido introduciendo su nombre y dandole 'Click' en el botón "Buscar".
+            </p>
+
+            <div class="buscador">
+            Nombre: <input type="text" name="name" id="name">
+            <button type="button" id="botonName" class="btn btn-primary">BUSCAR</button>
+
+            <button type="button" class="btn btn-success" id="btn-todos">BUSCAR TODOS</button>
+
+            </div>
+
+            <div class="div-personajes" id="div-personajes"></div>
+
+        </div>
 
         <div id="detalleDeCompra">
             <!-- mostrar carrito con JS -->
@@ -74,7 +97,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Comprar</button>
+                            <button type="button" class="btn btn-primary" id="comprar">Comprar</button>
                         </div>
                     </div>
                 </div>
@@ -93,7 +116,7 @@
     <footer class="footer">
 
         <div class="footer-div">
-            <ul>
+            <ul class="ul-footer">
                 <li>Anime</li>
                 <li>Marvel Comics</li>
                 <li>DC Comics</li>
@@ -112,13 +135,16 @@
 
 
 
-    <!-- Script para Bootstrap -->
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 
-    <!-- Script para Sweet Alert -->
+    <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script src="./js/index.js"></script>
 

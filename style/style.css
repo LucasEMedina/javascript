@@ -33,6 +33,11 @@ body{
 header{
     width: 100%;
     height: auto;
+    background-color: black;
+    background-image: url(/multimedia/sony-life.jpg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -45,6 +50,7 @@ header{
     text-align: center;
     justify-content: center;
     align-items: center;
+    color: #fff;
     margin: 20px 0;
     width: 100%;    
 }
@@ -90,11 +96,21 @@ header{
     flex-direction: column;
 }
 
+.indexMain{
+    width: 100%;
+    background-image: url(../multimedia/templo-Kamisamas.png);
+    background-position: center;
+    background-size: cover;
+}
+
+
 .div-form{
     position: absolute;
     width: 100%;
-    height: 100%;
-    background: black;
+    height: 100vh;
+    background-image: url(../multimedia/univers-fondo.jpg);
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,6 +124,8 @@ header{
 }
 
 .titulo-productos{
+    color: rgb(252, 232, 55);
+    margin-top: 30px;
     padding-left: 5%;
 }
 
@@ -124,8 +142,8 @@ header{
     margin: 40px;
     padding: 10px;
     text-align: center;
-	width: 350px;
-    height: 500px;
+	width: 260px;
+    height: 480px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -138,7 +156,7 @@ header{
 }
 
 .card-img-top{
-    width: 300px;
+    width: 230px;
     border-radius: 10px;
 }
 
@@ -175,12 +193,71 @@ header{
     padding: 5px;
 }
 
+.div-personajes{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.h3-personajes{
+    margin: 20px;
+}
+
+.p-personajes{
+    margin: 20px;
+    width: 90vh;
+}
+
+.buscador{
+    margin: 30px 20px;
+}
+
+#botonName{
+    margin: 0 20px;
+}
+
+.card-personajes{
+    width: 250px;
+    height: 450px;
+    margin: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.815);
+    border-radius: 10px;
+    border:1px solid rgb(0, 0, 0);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.897);
+}
+
+.img-div{
+    width: 230px;
+    height: 250px;
+}
+
+.img-card{
+    width: 230px;
+    height: 250px;
+    object-fit: contain;
+}
+
 .footer{
     width: 100%;
     height: auto;
+    background-color: black;
+    background-image: url(/multimedia/gamer-4k.jpg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: flex-start;
     position: static;
+}
+
+.ul-footer li{
+    color: #fff;
 }
