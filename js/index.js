@@ -517,19 +517,46 @@ const ingresarNombre = document.getElementById('name')
 const botonName = document.getElementById('botonName')
 
 
-
 botonName.onclick = async () =>{
-    let info
     const nombreValue = ingresarNombre.value
-
     if (nombreValue !== ''){
-    info = await fetch(`https://dragon-ball-super-api.herokuapp.com/api/characters/${nombreValue}`)
-}
+    let info = await fetch(`https://dragon-ball-super-api.herokuapp.com/api/characters/${nombreValue}`)
+
     const infoJson = await info.json()
     const personaje = infoJson
-    crearCards(personaje)
-    
-}
+
+    divPersonajes.innerHTML = ''
+    //personaje.forEach((element) => {
+        const divCards = document.createElement('div')
+        divCards.setAttribute('class', 'card-personajes')
+        divCards.innerHTML = `
+            <div class="img-div">
+                <img src=${personaje.imageUrl} class="img-card">
+            </div>
+            <div class="body-card">
+                <h5 class="h5-card">${personaje.name}</h5>
+                <p class="text-card">Este personaje era un ${personaje.role}</p>
+            </div>
+            <ul class="ul-card list-group-flush">
+                <li class="li-card">Planeta de Origen: ${personaje.originplanet}</li>
+                <li class="li-card">Especie: ${personaje.specie}</li>
+                <li class="li-card">Status: ${personaje.status}</li>
+            </ul>
+            `
+    divPersonajes.append(divCards)            
+    //})
+    }else{
+        divPersonajes.innerHTML = ''
+        Swal.fire({
+            icon: 'warning',
+            title: 'Debes ingresar el nombre del personaje que desees buscar!!',
+            showConfirmButton: false,
+            timer: 2500
+          })
+    }
+
+}   
+
 
 btnTodos.onclick = async () => {
     
