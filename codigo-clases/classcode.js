@@ -1965,7 +1965,7 @@ function createCards(array){
       })
 }
 
-//------- pokemons.json
+//------ pokemons.json
 
 [
   {
