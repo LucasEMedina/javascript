@@ -11,11 +11,14 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 
     <!-- Toastify JS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/f07bd02e3a.js" crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -33,11 +36,10 @@
 
         <nav class="nav">
             <button id="botonCarrito" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <img class="icon-carrito" src="./multimedia/agregar-carrito.png" alt="carrito de compras"><span
-                id="contadorCarrito">0</span>
+                <i class="fa-solid fa-cart-shopping icon-carrito"></i><span id="contadorCarrito">0</span>
             </button>
-            
-           
+
+
 
         </nav>
 
@@ -56,7 +58,19 @@
 
         </div>
 
-        <h2 class="titulo-productos">ACTION FIGURES OF ANIME</h2>
+        <h2 class="titulo-productos">ACTION FIGURES OF COMICS</h2>
+
+        <div class="titulos-categorias">
+            <img class="img-categorias" id="selecAvenger" src="./multimedia/avengers-logo.jpg" alt="avengers titulo">
+            <img class="img-categorias" id="selecDragonBall" src="./multimedia/dragonball-escudo.jpg"
+                alt="dragonball escudo">
+            <img class="img-categorias" id="selecJustice" src="./multimedia/justice-league-logo.jpg"
+                alt="justice league titulo">
+        </div>
+        <div class="btn-categorias">
+            <button class="btn-mostrar" id="showAll">Show All</button>
+            <button class="btn-limpiar" id="clean">Clean</button>
+        </div>
 
         <article id="articulos"></article> <!-- aca van las cards mediante JS -->
 
@@ -65,14 +79,16 @@
             <h3 class="h3-personajes">Buscar Personajes</h3>
 
             <p class="p-personajes">
-                Aquí podras buscar todos los personajes de tu Anime favorito, haciendo 'Click' en el botón "Buscar Todos". O puedes buscar tu personaje preferido introduciendo su nombre y dandole 'Click' en el botón "Buscar".
+                Aquí podras buscar todos los personajes de tu Anime favorito, haciendo 'Click' en el botón "Buscar
+                Todos". O puedes buscar tu personaje preferido introduciendo su nombre y dandole 'Click' en el botón
+                "Buscar".
             </p>
 
             <div class="buscador">
-            Nombre: <input type="text" name="name" id="name">
-            <button type="button" id="botonName" class="btn btn-primary">BUSCAR</button>
+                Nombre: <input type="text" name="name" id="name">
+                <button type="button" id="botonName" class="btn btn-primary">BUSCAR</button>
 
-            <button type="button" class="btn btn-success" id="btn-todos">BUSCAR TODOS</button>
+                <button type="button" class="btn btn-success" id="btn-todos">BUSCAR TODOS</button>
 
             </div>
 
@@ -84,20 +100,20 @@
             <!-- mostrar carrito con JS -->
 
             <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             <h3 class="modal-title" id="staticBackdropLabel">Detalles de la compra!</h3>
                             <h4 id="saludoUss"></h4>
-                            
+
                         </div>
                         <div id="modal-body">
                             
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" id="vaciarCarrito">Vaciar Carrito</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" id="comprar">Comprar</button>
                         </div>
