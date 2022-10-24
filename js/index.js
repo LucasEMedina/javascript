@@ -6,16 +6,55 @@ const inputApellido = document.getElementById('apellido')
 const inputEdad = document.getElementById('edad')
 const botonDatos = document.getElementById('boton-enviar')
 
+document.addEventListener('DOMContentLoaded', () =>{
+if (sessionStorage.getItem('usuario')){
+    usuario = JSON.parse(sessionStorage.getItem('usuario'))
+    divForm.remove()
+}
+})
+
+const registroDeUsuario = () => {
+    
+
+    if (inputEdad.value != '') {
+        divForm.remove()
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Bienvenido/a '+inputNombre.value +' '+inputApellido.value+'!!',
+            showConfirmButton: false,
+            timer: 2000,
+            text: 'Esperamos que disfrutes nuestro sitio!!',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })            
+    } else {
+        Toastify({
+            text: "Debes ingresar tu edad!!",
+            duration: 2000,
+            className: "info",
+            style: {
+              background: "radial-gradient(circle, rgba(150,9,9,1) 24%, rgba(208,24,24,1) 72%, rgba(203,26,83,1) 97%)",
+            },
+        }).showToast();
+    }
+}
+
 botonDatos.onclick = () => {
     const usuario = {
         nombre: inputNombre.value,
         apellido: inputApellido.value,
         edad: inputEdad.value
     }
-    localStorage.setItem('usuarioIngresado', JSON.stringify(usuario))
-    divForm.remove()
-    console.log(usuario)
+    sessionStorage.setItem('usuario', JSON.stringify(usuario))
+    registroDeUsuario()
+        
 }
+
 
 let carrito = []
 let productos = []
@@ -25,11 +64,12 @@ let prodJustice = []
 const contain = document.getElementById('articulos')
 
 class Figura {
-    constructor(nombre, precio, img, id, desc = '') {
+    constructor(nombre, precio, img, id, cantidad, desc = '') {
         this.nombre = nombre
         this.precio = precio
         this.img = img
         this.id = id
+        this.cantidad = cantidad
         this.desc = desc
     }
     cardFiguras() {
@@ -54,46 +94,60 @@ class Figura {
         const productoAgregado = productos.find(product => product.id == this.id)
 
         btncomprar.onclick = () => {
+            if (inputEdad.value >= 18) {
+                enElCarrito(productoAgregado)
 
-            enElCarrito(productoAgregado)
-
-            Toastify({
-                text: "Producto agregado al carrito!",
-                duration: 1000,
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }
-            }).showToast();
+                Toastify({
+                    text: "Producto agregado al carrito!",
+                    duration: 1000,
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
+            } else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Debes tener + de 18 años para poder comprar!!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                }) 
+            }
         }
     }
 }
 
-let figuraDragon1 = new Figura('Goku Super Saiayin', 13500, './multimedia/goku-super-saiayin.jpg', 01, 'Figura coleccionable de Goku Super Saiayin contra Freezer, 30cm.')
-let figuraDragon2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
-let figuraDragon3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
-let figuraDragon4 = new Figura('Broly', 11500, './multimedia/broly-3d.jpg', 04, 'Figura coleccionable de Broly Super Saiayin, 35cm.')
-let figuraDragon5 = new Figura('Gohan', 11500, './multimedia/gohan-cell.jpg', 05, 'Figura coleccionable de Gohan Super Saiayin saga vs Cell, 25cm.')
-let figuraDragon6 = new Figura('Gohan Ninja', 13500, './multimedia/gohan-ninja.jpg', 06, 'Figura coleccionable de Gohan Ninja Version, 25cm.')
-let figuraDragon7 = new Figura('Gohan Final', 14500, './multimedia/gohan-final.jpg', 07, 'Figura coleccionable de Gohan Final transformation, 30cm.')
-let figuraDragon8 = new Figura('Trunks', 13500, './multimedia/trunks-adulto.jpg', 08, 'Figura coleccionable de Trunks, 30cm.')
-let figuraDragon9 = new Figura('Vegeta M', 13500, './multimedia/vegeta-maldad.jpg', 09, 'Figura coleccionable de Vegeta version vs Magin Boo, 25cm.')
-let figuraDragon10 = new Figura('Vegeta', 11500, './multimedia/vegeta-normal.jpg', 10, 'Figura coleccionable de Vegeta, 25cm.')
-let figuraDragon11 = new Figura('Vegeta Ultra Ego', 13500, './multimedia/vegetaUltraEgo.jpg', 11, 'Figura coleccionable de Vegeta Ultra Ego, 30cm.')
-let figuraDragon12 = new Figura('Freezer', 11500, './multimedia/freezer.jpg', 12, 'Figura coleccionable de Freezer, 25cm.')
+let figuraDragon1 = new Figura('Goku Super Saiayin', 13500, './multimedia/goku-super-saiayin.jpg', 01, 1, 'Figura coleccionable de Goku Super Saiayin contra Freezer, 30cm.')
+let figuraDragon2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 1, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
+let figuraDragon3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 1, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
+let figuraDragon4 = new Figura('Broly', 11500, './multimedia/broly-3d.jpg', 04, 1, 'Figura coleccionable de Broly Super Saiayin, 35cm.')
+let figuraDragon5 = new Figura('Gohan', 11500, './multimedia/gohan-cell.jpg', 05, 1, 'Figura coleccionable de Gohan Super Saiayin saga vs Cell, 25cm.')
+let figuraDragon6 = new Figura('Gohan Ninja', 13500, './multimedia/gohan-ninja.jpg', 06, 1, 'Figura coleccionable de Gohan Ninja Version, 25cm.')
+let figuraDragon7 = new Figura('Gohan Final', 14500, './multimedia/gohan-final.jpg', 07, 1, 'Figura coleccionable de Gohan Final transformation, 30cm.')
+let figuraDragon8 = new Figura('Trunks', 13500, './multimedia/trunks-adulto.jpg', 08, 1, 'Figura coleccionable de Trunks, 30cm.')
+let figuraDragon9 = new Figura('Vegeta M', 13500, './multimedia/vegeta-maldad.jpg', 09, 1, 'Figura coleccionable de Vegeta version vs Magin Boo, 25cm.')
+let figuraDragon10 = new Figura('Vegeta', 11500, './multimedia/vegeta-normal.jpg', 10, 1, 'Figura coleccionable de Vegeta, 25cm.')
+let figuraDragon11 = new Figura('Vegeta Ultra Ego', 13500, './multimedia/vegetaUltraEgo.jpg', 11, 1, 'Figura coleccionable de Vegeta Ultra Ego, 30cm.')
+let figuraDragon12 = new Figura('Freezer', 11500, './multimedia/freezer.jpg', 12, 1, 'Figura coleccionable de Freezer, 25cm.')
 
-let figuraAvenger13 = new Figura('Black Panter', 14500, './multimedia/black-panter.jpg', 13, 'Figura coleccionable de Black Panter, 32cm.')
-let figuraAvenger14 = new Figura('Capitan America', 14500, './multimedia/capitan-america.jpg', 14, 'Figura coleccionable de Capitan America, 30cm.')
-let figuraAvenger15 = new Figura('Thor', 15500, './multimedia/thor.jpg', 15, 'Figura coleccionable de thor, 30cm.')
-let figuraAvenger16 = new Figura('Spiderman', 14500, './multimedia/spider-man.jpg', 16, 'Figura coleccionable de Spiderman, 30cm.')
-let figuraAvenger17 = new Figura('Iron Man', 15000, './multimedia/iron-man.jpg', 17, 'Figura coleccionable de Iron Man, 30cm.')
-let figuraAvenger18 = new Figura('Hulk', 14500, './multimedia/hulk.jpg', 18, 'Figura coleccionable de Hulk, 35cm.')
+let figuraAvenger13 = new Figura('Black Panter', 14500, './multimedia/black-panter.jpg', 13, 1, 'Figura coleccionable de Black Panter, 32cm.')
+let figuraAvenger14 = new Figura('Capitan America', 14500, './multimedia/capitan-america.jpg', 14, 1, 'Figura coleccionable de Capitan America, 30cm.')
+let figuraAvenger15 = new Figura('Thor', 15500, './multimedia/thor.jpg', 15, 1, 'Figura coleccionable de thor, 30cm.')
+let figuraAvenger16 = new Figura('Spiderman', 14500, './multimedia/spider-man.jpg', 16, 1, 'Figura coleccionable de Spiderman, 30cm.')
+let figuraAvenger17 = new Figura('Iron Man', 15000, './multimedia/iron-man.jpg', 17, 1, 'Figura coleccionable de Iron Man, 30cm.')
+let figuraAvenger18 = new Figura('Hulk', 14500, './multimedia/hulk.jpg', 18, 1, 'Figura coleccionable de Hulk, 35cm.')
 
-let figuraJustice19 = new Figura('Batman', 15500, './multimedia/batman-señal.jpg', 19, 'Figura coleccionable de Batman, 35cm.')
-let figuraJustice20 = new Figura('Aquaman', 14500, './multimedia/aquaman.jpg', 20, 'Figura coleccionable de Aquaman, 30cm.')
-let figuraJustice21 = new Figura('Wonder Woman', 14500, './multimedia/wonder-woman.jpg', 21, 'Figura coleccionable de Wonder Woman, 30cm.')
-let figuraJustice22 = new Figura('Deadpool', 15000, './multimedia/deadpool.jpg', 22, 'Figura coleccionable de Deadpool, 30cm.')
-let figuraJustice23 = new Figura('Flash', 14500, './multimedia/flash.jpg', 23, 'Figura coleccionable de Flash, 30cm.')
-let figuraJustice24 = new Figura('Superman', 14500, './multimedia/superman.jpg', 24, 'Figura coleccionable de Superman, 30cm.')
+let figuraJustice19 = new Figura('Batman', 15500, './multimedia/batman-señal.jpg', 19, 1, 'Figura coleccionable de Batman, 35cm.')
+let figuraJustice20 = new Figura('Aquaman', 14500, './multimedia/aquaman.jpg', 20, 1, 'Figura coleccionable de Aquaman, 30cm.')
+let figuraJustice21 = new Figura('Wonder Woman', 14500, './multimedia/wonder-woman.jpg', 21, 1, 'Figura coleccionable de Wonder Woman, 30cm.')
+let figuraJustice22 = new Figura('Deadpool', 15000, './multimedia/deadpool.jpg', 22, 1, 'Figura coleccionable de Deadpool, 30cm.')
+let figuraJustice23 = new Figura('Flash', 14500, './multimedia/flash.jpg', 23, 1, 'Figura coleccionable de Flash, 30cm.')
+let figuraJustice24 = new Figura('Superman', 14500, './multimedia/superman.jpg', 24, 1, 'Figura coleccionable de Superman, 30cm.')
 
 productos.push(figuraDragon1, figuraDragon2, figuraDragon3, figuraDragon4, figuraDragon5, figuraDragon6, figuraDragon7, figuraDragon8, figuraDragon9, figuraDragon10, figuraDragon11, figuraDragon12, figuraAvenger13, figuraAvenger14, figuraAvenger15, figuraAvenger16, figuraAvenger17, figuraAvenger18, figuraJustice19, figuraJustice20, figuraJustice21, figuraJustice22, figuraJustice23, figuraJustice24)
 
@@ -156,28 +210,41 @@ clean.onclick = () => {
 
 function enElCarrito(producto) {
 
-    const enElCarrito = carrito.find(prod => prod.id == producto.id)
+    const existe = carrito.some (prod => prod.id === producto.id)
 
-    if (!enElCarrito) {
-        carrito.push({ ...producto, cantidad: 1 })
+    if (existe){
+        const prod = carrito.map (prod => {
+            if (prod.id === producto.id){
+                prod.cantidad++
+            }
+        })
     } else {
-        let filtrarCarrito = carrito.filter(prod => prod.id != producto.id)
-        carrito = [...filtrarCarrito, { ...enElCarrito, cantidad: enElCarrito.cantidad + 1 }]
-    }
 
-    contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
-
+    carrito.push(producto)
+    
+    contador.innerText = carrito.length
+    
+}
     localStorage.setItem('carrito', JSON.stringify(carrito))
     console.log(carrito)
 }
 
 const contador = document.getElementById('contadorCarrito')
-contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
+contador.innerText = carrito.length
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('carrito')){
+        carrito = JSON.parse(sessionStorage.getItem('carrito'))
+        actualizarCarrito()
+    }
+})
 
 
 const botonCarrito = document.getElementById('botonCarrito')
 const modalBody = document.getElementById('modal-body')
 const botonComprar = document.getElementById('comprar')
+
+const divPrecioTotal = document.getElementById('divPrecioTotal')
 
 const actualizarCarrito = () => {
     modalBody.innerHTML = ''
@@ -192,78 +259,92 @@ const actualizarCarrito = () => {
                 <button onclick="eliminarDelCarrito(${producto.id})" class="eliminar" id="eliminarDelCarrito"><i class="fa-solid fa-trash-can"></i></button>
                 `
             modalBody.append(divCarrito)
+            divPrecioTotal.innerHTML = `
+            <p class="precio-compra">Precio Total: $<span id="precioTotal">0</span></p>
+            `
+
+            sessionStorage.setItem('carrito', JSON.stringify(carrito))
         })
+
+    contador.innerText = carrito.length
+    const precioTotal = document.getElementById('precioTotal')
+    precioTotal.innerText = carrito.reduce((acc, prod) => acc + (prod.precio * prod.cantidad), 0)
+
+    //--- Operadores Avanzados ---
+    function compraPorMayor(compra) {
+        return compra <= 40000 ? 'No supera la compra minima.' : 'Califica como compra por mayor.'
+    }
+    console.log(compraPorMayor(precioTotal))
+
+    let envioEnCaja = carrito.reduce((acc, prod) => acc + prod.cantidad, 0) >= 5 && 'Preparar caja para envio'
+    console.log(envioEnCaja) 
+
 }        
 
 const carritoVacio = () => {
     modalBody.innerHTML = ''
+    divPrecioTotal.innerHTML = ''
     const sinCompra = document.createElement('h5')
     sinCompra.innerText = 'No tienes productos en tu carrito!!'    
     modalBody.append(sinCompra)
 }
 
 botonCarrito.onclick = () => {
-
     const saludoUss = document.getElementById('saludoUss')
-    const infoUss = JSON.parse(localStorage.getItem('usuarioIngresado'))
+    const infoUss = JSON.parse(sessionStorage.getItem('usuario'))
     saludoUss.innerText = `Hola ${infoUss.nombre} ${infoUss.apellido}, esta es tu compra.`
     
     carritoVacio()
-    
-
 
     if (carrito.length != 0) {
-
         actualizarCarrito()
-
-        let totalCompra = carrito.reduce((acc, prod) => acc + (prod.precio * prod.cantidad), 0)
-        console.log(totalCompra)
-
-        const compraTotal = document.createElement('h5')
-        compraTotal.innerText = `El total de la compra es de $${totalCompra}`
-        modalBody.append(compraTotal)
-
-        //--- Operadores Avanzados ---
-
-        function compraPorMayor(compra) {
-            return compra <= 40000 ? 'No supera la compra minima.' : 'Califica como compra por mayor.'
-        }
-        console.log(compraPorMayor(totalCompra))
-
-        let envioEnCaja = carrito.reduce((acc, prod) => acc + prod.cantidad, 0) >= 5 && 'Preparar caja para envio'
-        console.log(envioEnCaja)
-
     }
 
 }
 
 const eliminarDelCarrito = (prodId) => {
     const item = carrito.find((prod) => prod.id === prodId)
+    item.cantidad = item.cantidad -1
+    if (item.cantidad === 0){
     const indice = carrito.indexOf(item)
-    carrito.splice(indice, 1) 
-        
-    actualizarCarrito()    
+    carrito.splice(indice, 1)
+    item.cantidad = 1
+    }
+    contador.innerHTML = carrito.length
+    console.log(item)
+    console.log(carrito.length)
+            
+    actualizarCarrito()
+
+    if(carrito.length === 0){
+        carritoVacio()
+    }
 }
 
 const vaciarCarrito = document.getElementById('vaciarCarrito')
 vaciarCarrito.onclick = () => {
+    productos.forEach(e => {
+        e.cantidad = 1
+    })
     carrito.length = 0
     contador.innerHTML = '0'
     carritoVacio()
 }
 
-botonComprar.onclick = () => {
-    Swal.fire({
-        icon: 'success',
-        title: 'Compra realizada!',
-        text: 'Es hora de disfrutar tus figuras de accion!!',
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-        }
-    })
+botonComprar.onclick = () => {  
+    if (carrito.length != 0){  
+        Swal.fire({
+            icon: 'success',
+            title: 'Compra realizada!',
+            text: 'Es hora de disfrutar tus figuras de accion!!',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    }
 }
 
 
@@ -271,7 +352,7 @@ const btnTodos = document.getElementById('btn-todos')
 const divPersonajes = document.getElementById('div-personajes')
 const ingresarNombre = document.getElementById('name')
 const botonName = document.getElementById('botonName')
-
+const borrarApi = document.getElementById('borrarApi')
 
 botonName.onclick = async () => {
     const nombreValue = ingresarNombre.value
@@ -322,7 +403,9 @@ btnTodos.onclick = async () => {
     crearCards(personajes)
 }
 
-
+borrarApi.onclick = async () => {
+    divPersonajes.innerHTML = ''
+}
 
 function crearCards(result) {
     divPersonajes.innerHTML = ''

@@ -22,7 +22,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Curso de Javascript</title>
+    <title>P&C Figuras de Accion</title>
 
     <link rel="stylesheet" type="text/css" href="/style/style.css">
 </head>
@@ -32,14 +32,13 @@
 
     <header>
 
-        <h1 id="titulo">ACTION FIGURES</h1>
+        <h1 id="titulo">P&C ACTION FIGURES</h1>
 
         <nav class="nav">
+
             <button id="botonCarrito" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <i class="fa-solid fa-cart-shopping icon-carrito"></i><span id="contadorCarrito">0</span>
             </button>
-
-
 
         </nav>
 
@@ -52,7 +51,7 @@
             <form class="form">
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre">
                 <input type="text" name="apellido" id="apellido" placeholder="Apellido">
-                <input type="numbre" name="edad" id="edad" placeholder="Edad">
+                <input type="numbre" name="edad" id="edad" placeholder="Edad" required>
                 <button id="boton-enviar">ENVIAR</button>
             </form>
 
@@ -79,16 +78,18 @@
             <h3 class="h3-personajes">Buscar Personajes</h3>
 
             <p class="p-personajes">
-                Aquí podras buscar todos los personajes de tu Anime favorito, haciendo 'Click' en el botón "Buscar
-                Todos". O puedes buscar tu personaje preferido introduciendo su nombre y dandole 'Click' en el botón
-                "Buscar".
+                Aquí podras buscar todos los personajes de Dragon Ball, haciendo 'Click' en el botón "Buscar
+                Todos". O puedes buscar tu personaje preferido introduciendo su nombre (ingresa la primer letra siempre con mayuscula, por ej; Son Goku) y dandole 'Click' en el botón "Buscar".
             </p>
 
             <div class="buscador">
-                Nombre: <input type="text" name="name" id="name">
+                <label class="label-buscador">Nombre:</label>
+                <input type="text" name="name" id="name" placeholder="ej: Gohan">
                 <button type="button" id="botonName" class="btn btn-primary">BUSCAR</button>
 
                 <button type="button" class="btn btn-success" id="btn-todos">BUSCAR TODOS</button>
+
+                <button type="button" class="btn btn-danger" id="borrarApi">Borrar</button>
 
             </div>
 
@@ -112,7 +113,10 @@
                         <div id="modal-body">
                             
                         </div>
-                        <div class="modal-footer">
+                        <div class="div-precioTotal" id="divPrecioTotal">
+                            
+                        </div>
+                        <div class="modal-footer">                            
                             <button type="button" class="btn btn-danger" id="vaciarCarrito">Vaciar Carrito</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" id="comprar">Comprar</button>

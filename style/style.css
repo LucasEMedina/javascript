@@ -147,6 +147,11 @@ header{
     padding-left: 5%;
 }
 
+.info{
+    margin-top: 35%;
+    margin-right: 30%;
+}
+
 #articulos{
     display: flex;
     flex-direction: row;
@@ -304,8 +309,17 @@ header{
     margin: 30px 20px;
 }
 
+.label-buscador{
+    color: rgb(236, 238, 111);
+    margin-right: 10px;  
+}
+
 #botonName{
     margin: 0 20px;
+}
+
+#borrarApi{
+    margin-left: 20px;
 }
 
 .card-personajes{
