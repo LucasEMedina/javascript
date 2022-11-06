@@ -50,9 +50,10 @@ header{
     text-align: center;
     justify-content: center;
     align-items: center;
-    color: #fff;
     margin: 20px 0;
-    width: 100%;    
+    width: 100%;
+    font-family: 'Racing Sans One', cursive;
+    color: rgb(228,95,28);
 }
 
 .nav{
@@ -137,14 +138,46 @@ header{
 }
 
 .h2-form{
-    color: #fff;
+    color: rgb(252, 232, 55);
+    text-shadow: 2px 2px 5px rgb(228,95,28);
     margin: 30px;
+    font-family: 'RocknRoll One', sans-serif;
+}
+
+.form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.form-datos{
+    border-radius: 5px;
+    border: none;
+    width: 25%;
+    text-align: center;
+    font-family: 'RocknRoll One', sans-serif;
+}
+
+#boton-enviar{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: #08eaf4;
+    box-shadow: 1px 1px 10px #08eaf4;
+    font-family: 'RocknRoll One', sans-serif;
+    background: linear-gradient(90deg, rgba(186,74,226,1) 16%, rgba(200,18,184,1) 50%, rgba(228,28,139,1) 84%);
+}
+
+#boton-enviar:hover{
+    color: #05b7c0;
+    background: linear-gradient(90deg, rgb(144, 58, 175) 16%, rgb(151, 14, 140) 50%, rgb(153, 19, 93) 84%); 
 }
 
 .titulo-productos{
     color: rgb(252, 232, 55);
     margin-top: 30px;
     padding-left: 5%;
+    font-family: 'Shojumaru', cursive;
 }
 
 .info{
@@ -197,26 +230,30 @@ header{
 
 .btn-mostrar{
     border-radius: 5px;
-    background: linear-gradient(to right, #232526, #414345);
     height: 2rem;
     width: 6rem;
     border: none;
     box-shadow: 0 0 5px white;
+    background: linear-gradient(90deg, rgba(228,95,28,1) 16%, rgba(233,190,43,1) 50%, rgba(228,95,28,1) 84%);
+    font-family: 'Racing Sans One', cursive
 }
 .btn-mostrar:hover{
-    background: linear-gradient(to right, #191b1b, #37383a);
+    color:#c81212;
+    background: radial-gradient(circle, rgba(228,95,28,1) 16%, rgba(233,190,43,1) 50%, rgba(228,95,28,1) 84%);
 }
 
 .btn-limpiar{
     border-radius: 5px;
-    background: linear-gradient(to left, #232526, #414345);
     height: 2rem;
     width: 6rem;
     border: none;
     box-shadow: 0 0 5px white;
+    background: linear-gradient(90deg, rgba(228,95,28,1) 16%, rgba(233,190,43,1) 50%, rgba(228,95,28,1) 84%);
+    font-family: 'Racing Sans One', cursive
 }
 .btn-limpiar:hover{
-    background: linear-gradient(to right, #37383a, #191b1b);
+    color:#c81212;
+    background: radial-gradient(circle, rgba(228,95,28,1) 16%, rgba(233,190,43,1) 50%, rgba(228,95,28,1) 84%);
 }
 
 .card-container{	
@@ -296,13 +333,16 @@ header{
 
 .h3-personajes{
     margin: 20px;
-    color: rgb(236, 238, 111);
+    color: rgb(236, 238, 111);    
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
 }
 
 .p-personajes{
     margin: 20px;
     width: 90vh;
     color: rgb(236, 238, 111);
+    font-family: 'Noto Serif', serif;
 }
 
 .buscador{
@@ -311,15 +351,25 @@ header{
 
 .label-buscador{
     color: rgb(236, 238, 111);
-    margin-right: 10px;  
+    margin-right: 10px;
+    font-family: 'Noto Serif', serif;
 }
 
 #botonName{
     margin: 0 20px;
+    color: rgb(236, 238, 111);
+    font-family: 'Noto Serif', serif;
+}
+
+#btn-todos{
+    color: rgb(236, 238, 111);
+    font-family: 'Noto Serif', serif;
 }
 
 #borrarApi{
     margin-left: 20px;
+    color: rgb(236, 238, 111);
+    font-family: 'Noto Serif', serif;
 }
 
 .card-personajes{

@@ -123,8 +123,8 @@ class Figura {
 }
 
 let figuraDragon1 = new Figura('Goku Super Saiayin', 13500, './multimedia/goku-super-saiayin.jpg', 01, 1, 'Figura coleccionable de Goku Super Saiayin contra Freezer, 30cm.')
-let figuraDragon2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henkiDama.jpg', 02, 1, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
-let figuraDragon3 = new Figura('Goku Modo Dios', 15200, './multimedia/gukuModoDios.jpg', 03, 1, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
+let figuraDragon2 = new Figura('Goku Henkidama', 11800, './multimedia/goku-henki-dama.jpg', 02, 1, 'Figura coleccionable de Goku haciendo la Henkidama, 30cm.')
+let figuraDragon3 = new Figura('Goku Modo Dios', 15200, './multimedia/guku-modo-dios.jpg', 03, 1, 'Figura coleccionable de Goku Super Saiayin Modo Dios, 30cm.')
 let figuraDragon4 = new Figura('Broly', 11500, './multimedia/broly-3d.jpg', 04, 1, 'Figura coleccionable de Broly Super Saiayin, 35cm.')
 let figuraDragon5 = new Figura('Gohan', 11500, './multimedia/gohan-cell.jpg', 05, 1, 'Figura coleccionable de Gohan Super Saiayin saga vs Cell, 25cm.')
 let figuraDragon6 = new Figura('Gohan Ninja', 13500, './multimedia/gohan-ninja.jpg', 06, 1, 'Figura coleccionable de Gohan Ninja Version, 25cm.')
@@ -132,7 +132,7 @@ let figuraDragon7 = new Figura('Gohan Final', 14500, './multimedia/gohan-final.j
 let figuraDragon8 = new Figura('Trunks', 13500, './multimedia/trunks-adulto.jpg', 08, 1, 'Figura coleccionable de Trunks, 30cm.')
 let figuraDragon9 = new Figura('Vegeta M', 13500, './multimedia/vegeta-maldad.jpg', 09, 1, 'Figura coleccionable de Vegeta version vs Magin Boo, 25cm.')
 let figuraDragon10 = new Figura('Vegeta', 11500, './multimedia/vegeta-normal.jpg', 10, 1, 'Figura coleccionable de Vegeta, 25cm.')
-let figuraDragon11 = new Figura('Vegeta Ultra Ego', 13500, './multimedia/vegetaUltraEgo.jpg', 11, 1, 'Figura coleccionable de Vegeta Ultra Ego, 30cm.')
+let figuraDragon11 = new Figura('Vegeta Ultra Ego', 13500, './multimedia/vegeta-ultra.jpg', 11, 1, 'Figura coleccionable de Vegeta Ultra Ego, 30cm.')
 let figuraDragon12 = new Figura('Freezer', 11500, './multimedia/freezer.jpg', 12, 1, 'Figura coleccionable de Freezer, 25cm.')
 
 let figuraAvenger13 = new Figura('Black Panter', 14500, './multimedia/black-panter.jpg', 13, 1, 'Figura coleccionable de Black Panter, 32cm.')

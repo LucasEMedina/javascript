@@ -13,6 +13,14 @@
     <!-- Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
+    <!-- Font Family title -->
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+    <!-- Font Family sub-title -->
+    <link href="https://fonts.googleapis.com/css2?family=Shojumaru&display=swap" rel="stylesheet">
+    <!-- Font Family text -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Family form -->
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 
     <!-- Toastify JS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -21,7 +29,7 @@
     <script src="https://kit.fontawesome.com/f07bd02e3a.js" crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <title>P&C Figuras de Accion</title>
 
     <link rel="icon" href="./multimedia/silueta-goku-naranja.png">
@@ -51,9 +59,9 @@
         <div class="div-form">
             <h2 class="h2-form">BIENVENIDO, INGRESA TUS DATOS</h2>
             <form class="form">
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre">
-                <input type="text" name="apellido" id="apellido" placeholder="Apellido">
-                <input type="numbre" name="edad" id="edad" placeholder="Edad" required>
+                <input type="text" name="nombre" id="nombre" class="form-datos" placeholder="Nombre">
+                <input type="text" name="apellido" id="apellido" class="form-datos" placeholder="Apellido">
+                <input type="numbre" name="edad" id="edad" class="form-datos" placeholder="Edad" required>
                 <button id="boton-enviar">ENVIAR</button>
             </form>
 
@@ -69,8 +77,8 @@
                 alt="justice league titulo">
         </div>
         <div class="btn-categorias">
-            <button class="btn-mostrar" id="showAll">Show All</button>
-            <button class="btn-limpiar" id="clean">Clean</button>
+            <button class="btn-mostrar" id="showAll">SHOW ALL</button>
+            <button class="btn-limpiar" id="clean">CLEAN</button>
         </div>
 
         <article id="articulos"></article> <!-- aca van las cards mediante JS -->
@@ -91,7 +99,7 @@
 
                 <button type="button" class="btn btn-success" id="btn-todos">BUSCAR TODOS</button>
 
-                <button type="button" class="btn btn-danger" id="borrarApi">Borrar</button>
+                <button type="button" class="btn btn-danger" id="borrarApi">BORRAR</button>
 
             </div>
 
